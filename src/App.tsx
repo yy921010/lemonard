@@ -4,6 +4,7 @@ import { Footer, Navbar } from '@/components';
 import routes from '@/router';
 import { MainBody, Content } from './App.style';
 import GlobalStyle from './global.style';
+import './index.css';
 
 const App = (): JSX.Element => {
     return (
@@ -27,7 +28,6 @@ const App = (): JSX.Element => {
                             : ''}
                     </Switch>
                 </Content>
-
                 <Footer />
             </MainBody>
         </>

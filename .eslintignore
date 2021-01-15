@@ -56,3 +56,4 @@ package.json
 *.scss.d.ts
 craco.config.js
 .eslintrc.js
+tailwind.config.js
