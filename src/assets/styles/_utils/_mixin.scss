@@ -1,0 +1,79 @@
+// bem for block
+@mixin b($block) {
+    $B: $namespace + '-' + $block !global;
+    .#{$B} {
+        @content;
+    }
+}
+// bem for component
+@mixin c($block) {
+    $B: 'c-' + $block !global;
+    .#{$B} {
+        @content;
+    }
+}
+// bem fro unity
+@mixin u($block) {
+    $B: 'u-' + $block !global;
+    .#{$B} {
+        @content;
+    }
+}
+
+// bem for element
+@mixin e($element) {
+    $E: $element !global;
+    $selector: &;
+    $currentSelector: '';
+    @each $unit in $element {
+        $currentSelector: #{$currentSelector + '.' + $B + $separator + $unit + ','};
+    }
+
+    @if hitAllSpecialNestRule($selector) {
+        @at-root {
+            #{$selector} {
+                #{$currentSelector} {
+                    @content;
+                }
+            }
+        }
+    } @else {
+        @at-root {
+            #{$currentSelector} {
+                @content;
+            }
+        }
+    }
+}
+
+// bem for modifier
+@mixin m($modifier) {
+    $selector: &;
+    $currentSelector: '';
+    @each $unit in $modifier {
+        $currentSelector: #{$currentSelector + & + $modifier-separator + $unit + ','};
+    }
+    @at-root {
+        #{$currentSelector} {
+            @content;
+        }
+    }
+}
+
+// deal with status
+@mixin when($state) {
+    @at-root {
+        &.#{$state-prefix + $state} {
+            @content;
+        }
+    }
+}
+
+@mixin select-none {
+}
+
+@mixin text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

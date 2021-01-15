@@ -1,0 +1,57 @@
+// colors
+$C01: rgba(245, 245, 245, 1);
+$C02: rgba(245, 245, 245, 0.5);
+$C03: rgba(245, 245, 245, 0.1);
+$C04: rgba(192, 31, 36, 1);
+$C05: rgba(180, 12, 18, 1);
+$C06: rgba(0, 0, 0, 0.9);
+$C07: rgba(0, 0, 0, 0.8);
+$C08: rgba(0, 0, 0, 0.7);
+$C09: rgba(0, 0, 0, 0.5);
+$C10: rgba(0, 0, 0, 0.4);
+$C11: transparent;
+$C12: rgba(20, 20, 20, 1);
+$C13: rgba(20, 20, 20, 0.5);
+$C14: rgba(24, 24, 24, 0.96);
+$C15: rgba(24, 24, 24, 0.8);
+$C16: rgba(30, 31, 33, 1);
+$C17: rgba(31, 31, 31, 0.95);
+$C18: rgba(31, 31, 31, 0.7);
+$C19: rgba(47, 47, 47, 1);
+$C20: rgba(143, 143, 143, 1);
+$C21: rgba(143, 143, 143, 0.1);
+$C22: rgba(28, 192, 246, 1);
+$C23: rgba(95, 95, 95, 1);
+$C28: rgb(34, 174, 77);
+$C29: rgb(252, 203, 53);
+
+//TEXT
+//default
+$C31: rgba(245, 245, 245, 1);
+//navigator
+$C32: rgba(245, 245, 245, 0.5);
+//warning
+$C33: rgba(192, 31, 36, 1);
+//unavaliable/input
+$C34: rgba(134, 134, 134, 1);
+//secondary
+$C35: rgba(143, 143, 143, 1);
+//reminder
+$C36: rgba(28, 192, 246, 1);
+//ICON
+$C41: rgba(245, 245, 245, 1);
+$C42: rgba(245, 245, 245, 0.5);
+$C43: rgba(143, 143, 143, 0.1);
+$C44: rgba(192, 31, 36, 1);
+$C45: rgba(143, 143, 143, 1);
+$C46: rgba(28, 192, 246, 1);
+$C47: rgba(134, 134, 134, 1);
+
+$mask: (
+    1: linear-gradient(to bottom, $C09, $C11),
+    2: linear-gradient(to bottom, $C11, $C09, $C08),
+    3: $C08,
+    4: linear-gradient(to bottom, $C13, $C11),
+    5: 0.4em 10px 0.9em 0em #1f1f1f,
+    6: linear-gradient(to bottom, $C11, $C08),
+);

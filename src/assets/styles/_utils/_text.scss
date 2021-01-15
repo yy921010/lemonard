@@ -1,0 +1,87 @@
+@mixin text-base($font-size, $font-color, $is-bold: false) {
+    font-size: unit($font-size);
+    color: $font-color;
+    @if $is-bold {
+        font-weight: bold;
+    }
+}
+
+@mixin text($textNumber, $color: $C31) {
+    @if $textNumber==11 {
+        // channel title
+        @include text-base(32, $color, true);
+    } @else if $textNumber==12 {
+        // pop title
+        @include text-base(32, $color);
+    } @else if $textNumber==13 {
+        // page title
+        @include text-base(24, $color);
+    } @else if $textNumber==14 {
+        // list/reminder/favorite video /modify password /favorite (title)
+        @include text-base(20, $color);
+    } @else if $textNumber==15 {
+        // list title/all channel
+        @include text-base(20, $color, true);
+    } @else if $textNumber==16 {
+        // table account title / all c31 /my video c35
+        @include text-base(18, $color, true);
+    } @else if $textNumber==17 {
+        // package title
+        @include text-base(16, $color, true);
+    } @else if $textNumber==18 {
+        // program title / body
+        @include text-base(14, $color);
+    } @else if $textNumber==20 {
+        // big content title
+        @include text-base(48, $color, true);
+    } @else if $textNumber==21 {
+        // package time
+        @include text-base(36, $C22, true);
+    } @else if $textNumber==22 {
+        // media content title
+        @include text-base(32, $color, true);
+    } @else if $textNumber==23 {
+        // account name / small content title
+        @include text-base(24, $color, true);
+    } @else if $textNumber==24 {
+        // account information
+        @include text-base(24, $C22);
+    } @else if $textNumber==25 {
+        //tv show name / package name
+        @include text-base(20, $color, true);
+    } @else if $textNumber==26 {
+        // package name / button name /page count
+        @include text-base(20, $color);
+    } @else if $textNumber==27 {
+        // rate
+        @include text-base(18, $color);
+    } @else if $textNumber==28 {
+        // movie title/body content
+        @include text-base(16, $color, true);
+    } @else if $textNumber==29 {
+        // poster title/body content /rate/price
+        @include text-base(16, $color);
+        line-height: unit(24);
+    } @else if $textNumber==30 {
+        //body content
+        @include text-base(16, $color);
+        line-height: unit(20);
+        font-style: italic;
+    } @else if $textNumber==31 {
+        // small body
+        @include text-base(14, $color, true);
+    } @else if $textNumber==32 {
+        //small body content / reminder
+        @include text-base(14, $color);
+        line-height: unit(20);
+    } @else if $textNumber==33 {
+        // package detail
+        @include text-base(14, $color);
+        line-height: unit(20);
+        font-style: italic;
+    } @else if $textNumber==34 {
+        // pop movie detail
+        @include text-base(14, $color);
+        line-height: unit(12);
+    }
+}
