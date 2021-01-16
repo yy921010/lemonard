@@ -1,16 +1,15 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Footer, Navbar } from '@/components';
+import { Navbar } from '@/components';
 import routes from '@/router';
-import { MainBody, Content } from './App.style';
 import './index.css';
 
 const App = (): JSX.Element => {
     return (
         <>
             <Navbar />
-            <MainBody>
-                <Content>
+            <section className="flex flex-col items-center h-full container">
+                <section className="flex-1">
                     <Switch>
                         {routes && routes.length > 0
                             ? routes.map((item) => {
@@ -25,9 +24,8 @@ const App = (): JSX.Element => {
                               })
                             : ''}
                     </Switch>
-                </Content>
-                <Footer />
-            </MainBody>
+                </section>
+            </section>
         </>
     );
 };
