@@ -1,15 +1,15 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Navbar } from '@/components';
+import { Navbar, Footer } from '@/components';
 import routes from '@/router';
-import './index.css';
+import 'twin.macro';
 
 const App = (): JSX.Element => {
     return (
         <>
             <Navbar />
-            <section className="flex flex-col items-center h-full container">
-                <section className="flex-1">
+            <section tw="flex flex-col items-center">
+                <section tw="w-full flex-shrink bg-black bg-opacity-90 text-gray-100">
                     <Switch>
                         {routes && routes.length > 0
                             ? routes.map((item) => {
@@ -25,6 +25,7 @@ const App = (): JSX.Element => {
                             : ''}
                     </Switch>
                 </section>
+                <Footer />
             </section>
         </>
     );

@@ -1,4 +1,4 @@
-import { Home, Detail, Guide, NotFound, Live, Vod } from '@/screen/Root';
+import { Home, VodId, Guide, NotFound, Live, Vod } from '@/screen/Root';
 
 const isShown = true;
 
@@ -20,12 +20,13 @@ const routes = [
         name: 'header.vod',
         component: Vod,
         path: '/vod',
+        exact: true,
         isShown,
     },
     {
         name: 'detail',
-        component: Detail,
-        path: '/detail/:id',
+        component: VodId,
+        path: '/vod/:id',
     },
     {
         name: 'guide',

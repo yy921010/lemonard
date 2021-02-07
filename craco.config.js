@@ -1,5 +1,4 @@
 // const {} = require('@craco/craco');
-const sassResourcesLoader = require('craco-sass-resources-loader');
 const path = require('path');
 const {whenProd} = require('@craco/craco');
 module.exports = {
@@ -30,12 +29,5 @@ module.exports = {
       ]
     }
   },
-  plugins: [
-    {
-      plugin: sassResourcesLoader,
-      options: {
-        resources: './src/assets/styles/config-theme.scss',
-      },
-    },
-  ],
+  plugins: [],
 };
