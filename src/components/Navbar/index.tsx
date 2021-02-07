@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDebounceFn } from 'ahooks';
 import 'twin.macro';
-import { Icon } from '@/components/UI';
+import { Icon } from '@/components/UIKit';
 import {
     Nav,
     NavContainer,

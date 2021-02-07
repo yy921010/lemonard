@@ -1,6 +1,7 @@
 import React from 'react';
+import 'twin.macro';
 
 const Vod = (): JSX.Element => {
-    return <div>this is Vod page</div>;
+    return <div tw="container mx-auto h-full">this is Vod page</div>;
 };
 export default Vod;

@@ -3,6 +3,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import ReactSlick from 'react-slick';
 import 'twin.macro';
 import React from 'react';
+import { Vod, VodBackground } from './styled';
 
 const vodInfo = {
     title: '旺达幻视',
@@ -100,16 +101,8 @@ const settings = {
 const vodDetail: React.FC = () => {
     return (
         <>
-            <div tw="flex flex-col w-full items-center relative">
-                <div
-                    tw="w-full bg-no-repeat bg-cover bg-center slashed-zero top-0
-          "
-                    style={{
-                        backgroundImage: `
-            linear-gradient(rgba(0,0,0,0.70),rgba(0,0,0,0.70))
-            ,url(${vodInfo.background})`,
-                    }}
-                />
+            <Vod>
+                <VodBackground background={vodInfo.background} />
                 <div tw="container z-10 absolute px-6 flex justify-between bottom-4">
                     <div
                         tw="rounded-md w-36 h-56 bg-no-repeat bg-center flex-shrink-0 mr-6 bg-cover"
@@ -130,7 +123,8 @@ const vodDetail: React.FC = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </Vod>
+
             <div tw="container px-6 space-y-4 mt-6 w-full mx-auto">
                 <button
                     type="button"
