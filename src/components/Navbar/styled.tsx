@@ -1,13 +1,6 @@
-import tw, { styled } from 'twin.macro';
+import tw, { css, styled } from 'twin.macro';
 
-interface NavbarProps {
-    isShowBlack: boolean;
-}
-
-export const Nav = styled.nav(({ isShowBlack }: NavbarProps) => [
-    tw`fixed top-0 left-0 w-full z-20 h-20`,
-    !isShowBlack ? tw`bg-transparent` : tw`bg-black bg-opacity-90`,
-]);
+export const Nav = styled.nav(() => [tw`fixed top-0 left-0 w-full z-20 h-20`]);
 
 export const NavContainer = tw.div`flex items-center justify-between px-4 h-full mx-auto container text-gray-100`;
 

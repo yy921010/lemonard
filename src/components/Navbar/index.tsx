@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useDebounceFn } from 'ahooks';
 import 'twin.macro';
 import { Icon } from '@/components/UIKit';
 import {
@@ -33,21 +32,21 @@ const menus = [
 ];
 
 const NavBar: React.FC = () => {
-    const [isScrollDown, setScrollDown] = useState<boolean>(false);
+    const [bgBlackNumber, setBgBlackNumber] = useState<number>(0);
     const [isShowMenu, setShowMenu] = useState<boolean>(false);
-    const { run } = useDebounceFn(
-        () => {
-            setScrollDown(window.pageYOffset > 40);
-        },
-        { wait: 50 },
-    );
+
+    const run = () => {
+        if (window.pageYOffset < 80) {
+            setBgBlackNumber(window.pageYOffset / 80);
+        }
+    };
 
     useEffect(() => {
         window.addEventListener('scroll', run);
         return () => {
             window.removeEventListener('scroll', run);
         };
-    }, [run]);
+    }, []);
 
     const handleShowMenu = () => {
         setShowMenu(true);
@@ -62,7 +61,11 @@ const NavBar: React.FC = () => {
         setShowMenu(false);
     };
     return (
-        <Nav isShowBlack={isScrollDown}>
+        <Nav
+            style={{
+                backgroundColor: `rgba(0,0,0,${bgBlackNumber})`,
+            }}
+        >
             <NavContainer>
                 <Icon name="menu" tw="text-2xl cursor-pointer text-gray-50 lg:hidden" onClick={handleShowMenu} />
                 <img tw="w-16" src="/img/logo.png" alt="logo" />
@@ -96,7 +99,7 @@ const NavBar: React.FC = () => {
                 >
                     <SideBarTop>
                         <TopLogo>
-                            <img tw="w-16" src="/logo.png" alt="logo" />
+                            <img tw="w-16" src="/img/logo.png" alt="logo" />
                         </TopLogo>
                         <MenuList>
                             {menus &&
