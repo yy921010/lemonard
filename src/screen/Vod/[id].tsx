@@ -3,6 +3,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import ReactSlick from 'react-slick';
 import 'twin.macro';
 import React from 'react';
+import { Poster } from '@/components/UIKit';
 import { Vod, VodBackground } from './styled';
 
 const vodInfo = {
@@ -103,13 +104,8 @@ const vodDetail: React.FC = () => {
         <>
             <Vod>
                 <VodBackground background={vodInfo.background} />
-                <div tw="container z-10 absolute px-6 flex justify-between bottom-4">
-                    <div
-                        tw="rounded-md w-36 h-56 bg-no-repeat bg-center flex-shrink-0 mr-6 bg-cover"
-                        style={{
-                            backgroundImage: `url(${vodInfo.poster})`,
-                        }}
-                    />
+                <div tw="container z-10 px-6 flex justify-between bottom-4">
+                    <Poster src={vodInfo.poster} aspectRatio={3 / 5} tw="mt-5" />
                     <div tw="flex-shrink">
                         <div tw="text-lg">{vodInfo.title}</div>
                         <div tw="text-gray-400">{vodInfo.subTitle}</div>

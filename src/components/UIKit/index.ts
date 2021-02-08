@@ -1,2 +1,2 @@
 export { default as Icon } from './RemixIcon';
-export { default as Select } from './Select';
+export { default as Poster } from './Poster';
