@@ -8,7 +8,13 @@ interface Props {
 }
 
 const Icon: React.FC<Props> = ({ name, type = 'line', className, onClick }) => {
-    return <i className={`ri-${name}-${type} ${className}`} onClick={onClick} aria-hidden="true" />;
+    return (
+        <i
+            className={className ? `ri-${name}-${type} ${className}` : `ri-${name}-${type}`}
+            onClick={onClick}
+            aria-hidden="true"
+        />
+    );
 };
 
 export default Icon;

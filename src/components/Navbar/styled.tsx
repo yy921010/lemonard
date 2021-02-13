@@ -1,4 +1,4 @@
-import tw, { css, styled } from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
 export const Nav = styled.nav(() => [tw`fixed top-0 left-0 w-full z-20 h-20`]);
 
