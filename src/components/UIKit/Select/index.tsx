@@ -1,19 +1,10 @@
 import React from 'react';
+import RcSelect, { SelectProps, Option } from 'rc-select';
+import 'rc-select/assets/index.less';
 
-interface Props {
-    name: string;
-    type?: 'fill' | 'line';
-    size?: number;
-}
-const Select: React.FC<Props> = ({ name, type, size }) => {
-    return (
-        <i
-            className={`ri-${name}-${type || 'line'}`}
-            style={{
-                fontSize: size,
-            }}
-        />
-    );
+const Select: React.FC<SelectProps> = ({ ...rest }) => {
+    return <RcSelect />;
 };
 
 export default Select;
+export { Option };

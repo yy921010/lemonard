@@ -1,19 +1,35 @@
 import React from 'react';
-import tw, { styled } from 'twin.macro';
+import tw, { styled, css } from 'twin.macro';
 
 interface ButtonProps {
-    buttonType?: 'primary' | 'info' | 'link';
-    size?: 'large' | 'medium' | 'small' | 'mini';
+    primary?: boolean;
+    info?: boolean;
+    link?: boolean;
+    circle?: boolean;
+    buttonType?: 'primary' | 'info' | 'link' | 'circle';
+    size?: 'large' | 'small' | 'mini';
     disable?: boolean;
     icon?: React.ReactNode;
 }
 
-const Button = styled.button(({ buttonType, size, disable, icon }: ButtonProps) => [
-    tw`inline-block cursor-pointer leading-none appearance-none box-border outline-none m-0 h-11 rounded
-    bg-transparent text-gray-100 px-4 border-gray-300 border hover:(border border-gray-800 bg-gray-800)`,
-    buttonType === 'primary' ? tw`bg-red-500 text-gray-100` : '',
-    buttonType === 'info' ? tw`bg-blue-400 text-gray-100` : '',
-    buttonType === 'link' ? tw`bg-transparent text-gray-100` : '',
+const Button = styled.button(({ primary, info, link, circle, size, disable }: ButtonProps) => [
+    tw`inline-flex justify-center items-center cursor-pointer leading-none appearance-none box-border outline-none m-0 rounded
+    bg-transparent text-gray-100 px-4 border-gray-300 border hover:(border border-gray-800 bg-gray-800) active:(outline-none) focus:(outline-none) h-8 md:h-11`,
+    primary ? tw`bg-red-500 text-gray-100 border-red-500 hover:(bg-red-400 text-gray-200 border-red-400)` : '',
+    info ? tw`bg-blue-500 text-gray-100 border-blue-500 hover:(bg-blue-400 text-gray-200 border-blue-400)` : '',
+    link ? tw`bg-transparent text-gray-100 border-none` : '',
+    circle ? tw`rounded-full w-8 h-8 p-0 md:(h-11 w-11)` : '',
+    disable ? tw`text-gray-600 cursor-not-allowed border-none bg-gray-800 hover:(bg-gray-800)` : '',
+    size === 'large'
+        ? [
+              tw`h-10`,
+              css`
+                  min-width: 300px;
+              `,
+          ]
+        : '',
+    size === 'small' ? tw`h-10` : '',
+    size === 'mini' ? tw`h-9` : '',
 ]);
 
 export default Button;

@@ -4,6 +4,7 @@ const zh = {
         'header.home': '首页',
         'header.live': '直播',
         'header.vod': '点播',
+        'vod.detail.playButton': '播放',
     },
 };
 

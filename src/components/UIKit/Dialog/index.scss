@@ -2,6 +2,7 @@
   position: relative;
   width: auto;
   margin: 10px;
+  border-radius: 4px;
 }
 .rc-dialog-wrap {
   position: fixed;
@@ -73,9 +74,9 @@
 .rc-dialog-footer .btn-block + .btn-block {
   margin-left: 0;
 }
-@media (min-width: 768px) {
+@media (min-width: 800px) {
   .rc-dialog {
-    width: 768px;
+    width: 800px;
     margin: 30px auto;
   }
   .rc-dialog-content {
