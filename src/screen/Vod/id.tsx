@@ -12,7 +12,7 @@ import vodInfo from './vodinof';
  * 组件命名需要大写命名
  */
 const VodId = (): JSX.Element => {
-    const [visible, setVisible] = useState<boolean>(false);
+    const [visible, setVisible] = useState<boolean>(true);
     const showDialog = () => {
         setVisible(true);
     };
@@ -23,11 +23,10 @@ const VodId = (): JSX.Element => {
                 onClose={() => {
                     setVisible(false);
                 }}
-            />
-
-            <div tw="container mx-auto">
+            >
                 <Detail {...vodInfo} />
-            </div>
+            </Dialog>
+            <Button onClick={showDialog}>open</Button>
         </>
     );
 };

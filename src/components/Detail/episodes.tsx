@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Select, Option } from '@/components/UIKit';
 
 import {
@@ -9,7 +9,8 @@ import {
     EpisodeNumber,
     EpisodePoster,
     EpisodeTitle,
-    EpisodeDuration,
+    EpisodeTitleWrap,
+    EpisodeListWrap,
 } from './styled';
 
 export interface EpisodeItem {
@@ -34,33 +35,34 @@ export interface EpisodesProps {
 
 const Episodes: React.FC<EpisodesProps> = ({ seasons }) => {
     console.log('episodes>>', seasons);
+
+    const [episodes, setEpisodes] = useState<EpisodeItem[]>(seasons[0].episodeList);
+    console.log('episodes', episodes);
     return (
         <>
-            <EpisodeMainTitle>剧集</EpisodeMainTitle>
-            <Select>
-                {seasons.map((item) => {
-                    return (
-                        <Option value={item.id} key={item.id}>
-                            {item.seasonName}
-                        </Option>
-                    );
-                })}
-            </Select>
-            {/* {episodes.length > 0
-                ? episodes.map((item) => {
-                      return (
-                          <EpisodeItem key={item.id}>
-                              <EpisodeNumber />
-                              <EpisodePoster />
-                              <EpisodeInfo>
-                                  <EpisodeTitle />
-                                  <EpisodeDescription />
-                              </EpisodeInfo>
-                              <EpisodeDuration>{item}</EpisodeDuration>
-                          </EpisodeItem>
-                      );
-                  })
-                : ''} */}
+            <EpisodeTitleWrap>
+                <EpisodeMainTitle>剧集</EpisodeMainTitle>
+                <div>sss</div>
+            </EpisodeTitleWrap>
+            <EpisodeListWrap>
+                {episodes.length > 0
+                    ? episodes.map((item) => {
+                          return (
+                              <EpisodeItem key={item.episodeNumber}>
+                                  <EpisodeNumber>{item.episodeNumber}</EpisodeNumber>
+                                  <EpisodePoster background={item.poster} />
+                                  <EpisodeInfo>
+                                      <EpisodeTitle>
+                                          <span>{item.title}</span>
+                                          <span>{item.playDuration}</span>
+                                      </EpisodeTitle>
+                                      <EpisodeDescription>{item.description}</EpisodeDescription>
+                                  </EpisodeInfo>
+                              </EpisodeItem>
+                          );
+                      })
+                    : ''}
+            </EpisodeListWrap>
         </>
     );
 };

@@ -6,7 +6,6 @@ interface ButtonProps {
     info?: boolean;
     link?: boolean;
     circle?: boolean;
-    buttonType?: 'primary' | 'info' | 'link' | 'circle';
     size?: 'large' | 'small' | 'mini';
     disable?: boolean;
     icon?: React.ReactNode;

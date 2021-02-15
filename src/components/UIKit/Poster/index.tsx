@@ -9,12 +9,15 @@ export interface PosterProp {
     onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
-const PosterWrap = styled.div(({ aspectRatio }: PosterProp) => [
-    tw`bg-no-repeat bg-center flex-shrink-0 bg-cover relative bg-black`,
-    css`
-        aspect-ratio: ${aspectRatio};
-    `,
-]);
+const PosterWrap = styled.div(({ aspectRatio = 1 / 1 }: PosterProp) => {
+    return [
+        tw`bg-no-repeat bg-center flex-shrink-0 bg-cover relative bg-black`,
+        css`
+            aspect-ratio: ${aspectRatio};
+            padding-bottom: ${(1 / aspectRatio) * 100}%;
+        `,
+    ];
+});
 
 const Poster: React.FC<PosterProp> = ({ className, aspectRatio = 1 / 1, onClick, src = '', children }) => {
     return (

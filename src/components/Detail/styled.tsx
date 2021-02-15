@@ -1,7 +1,7 @@
 import tw, { css, styled } from 'twin.macro';
 
 interface BackgroundProps {
-    background: string;
+    background?: string;
 }
 
 export const VodBackground = styled.div(({ background }: BackgroundProps) => [
@@ -33,11 +33,25 @@ export const VodMetaTag = tw.div`flex space-x-4 mb-2.5 flex-wrap`;
 export const VodMetaTagLabel = tw.div`text-gray-500`;
 export const VodMetaTagItems = tw.div``;
 
-export const EpisodeItem = tw.div``;
-export const EpisodeNumber = tw.div``;
-export const EpisodePoster = tw.div``;
-export const EpisodeInfo = tw.div``;
-export const EpisodeTitle = tw.div``;
-export const EpisodeDescription = tw.div``;
+export const EpisodeItem = styled.div(() => [
+    tw`flex px-4 w-full h-40 overflow-hidden items-center cursor-pointer hover:(bg-gray-700)`,
+]);
+export const EpisodeNumber = tw.div`text-3xl mr-4 text-gray-400`;
+
+export const EpisodePoster = styled.div(({ background }: BackgroundProps) => [
+    tw`bg-no-repeat bg-cover bg-center mr-4 h-20`,
+    css`
+        overflow: hidden;
+        background-image: url(${background});
+        flex: 0 0 18%;
+        -webkit-box-flex: 0;
+    `,
+]);
+
+export const EpisodeInfo = tw.div`w-full`;
+export const EpisodeTitle = tw.div`flex justify-between md:text-xl`;
+export const EpisodeDescription = tw.div`text-xs md:text-sm text-gray-400`;
 export const EpisodeDuration = tw.div``;
-export const EpisodeMainTitle = tw.div``;
+export const EpisodeMainTitle = tw.div`text-2xl`;
+export const EpisodeTitleWrap = tw.div`flex justify-between px-6 mt-10 border-b border-gray-600 h-14`;
+export const EpisodeListWrap = tw.div`space-y-2`;
