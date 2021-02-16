@@ -13,7 +13,7 @@ interface ButtonProps {
 
 const Button = styled.button(({ primary, info, link, circle, size, disable }: ButtonProps) => [
     tw`inline-flex justify-center items-center cursor-pointer leading-none appearance-none box-border outline-none m-0 rounded
-    bg-transparent text-gray-100 px-4 border-gray-300 border hover:(border border-gray-800 bg-gray-800) active:(outline-none) focus:(outline-none) h-8 md:h-11`,
+    bg-transparent text-gray-100 px-4 border-gray-300 border hover:(border bg-white bg-opacity-10) active:(outline-none) focus:(outline-none) h-8 md:h-11`,
     primary ? tw`bg-red-500 text-gray-100 border-red-500 hover:(bg-red-400 text-gray-200 border-red-400)` : '',
     info ? tw`bg-blue-500 text-gray-100 border-blue-500 hover:(bg-blue-400 text-gray-200 border-blue-400)` : '',
     link ? tw`bg-transparent text-gray-100 border-none` : '',

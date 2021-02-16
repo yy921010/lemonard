@@ -34,7 +34,8 @@ export const VodMetaTagLabel = tw.div`text-gray-500`;
 export const VodMetaTagItems = tw.div``;
 
 export const EpisodeItem = styled.div(() => [
-    tw`flex px-4 w-full h-40 overflow-hidden items-center cursor-pointer hover:(bg-gray-700)`,
+    tw`flex px-10 w-full h-40 overflow-hidden items-center cursor-pointer border-b border-gray-600
+     hover:(bg-white bg-opacity-10)`,
 ]);
 export const EpisodeNumber = tw.div`text-3xl mr-4 text-gray-400`;
 
@@ -53,5 +54,7 @@ export const EpisodeTitle = tw.div`flex justify-between md:text-xl`;
 export const EpisodeDescription = tw.div`text-xs md:text-sm text-gray-400`;
 export const EpisodeDuration = tw.div``;
 export const EpisodeMainTitle = tw.div`text-2xl`;
-export const EpisodeTitleWrap = tw.div`flex justify-between px-6 mt-10 border-b border-gray-600 h-14`;
-export const EpisodeListWrap = tw.div`space-y-2`;
+export const EpisodeTitleWrap = tw.div`flex justify-between px-6 mt-10 h-14 border-b border-gray-600`;
+export const EpisodeListWrap = tw.div``;
+
+export const EpisodeNextButton = tw.div`text-center -mt-6`;

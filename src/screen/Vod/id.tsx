@@ -12,13 +12,14 @@ import vodInfo from './vodinof';
  * 组件命名需要大写命名
  */
 const VodId = (): JSX.Element => {
-    const [visible, setVisible] = useState<boolean>(true);
+    const [visible, setVisible] = useState<boolean>(false);
     const showDialog = () => {
         setVisible(true);
     };
     return (
         <>
             <Dialog
+                destroyOnClose
                 visible={visible}
                 onClose={() => {
                     setVisible(false);
@@ -26,6 +27,7 @@ const VodId = (): JSX.Element => {
             >
                 <Detail {...vodInfo} />
             </Dialog>
+            <Detail {...vodInfo} />
             <Button onClick={showDialog}>open</Button>
         </>
     );
