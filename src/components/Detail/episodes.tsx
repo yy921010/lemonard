@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Button, Icon } from '@/components/UIKit';
+import { Button, Icon, Select } from '@/components/UIKit';
 import 'twin.macro';
 
 import {
@@ -70,9 +70,17 @@ const EpisodePaginationContainer: React.FC<EpisodePagination> = ({ seasonSize, o
 };
 
 const Episodes: React.FC<EpisodesProps> = ({ seasons }) => {
-    const [episodes, setEpisodes] = useState<EpisodeItem[]>(seasons[0].episodeList);
+    const [episodes, setEpisodes] = useState<EpisodeItem[]>([]);
+    const [defaultVal, setDefaultVal] = useState<string>('');
 
     const [isShowUp, setShowUp] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (seasons.length > 0) {
+            const firstSeason = seasons[0];
+            setDefaultVal(firstSeason?.id);
+        }
+    }, [seasons]);
 
     const showEpisodes = useMemo(() => {
         if (episodes.length > PAGE_SIZE) {
@@ -84,11 +92,24 @@ const Episodes: React.FC<EpisodesProps> = ({ seasons }) => {
     const onEpisodePagination = (isUp: boolean) => {
         setShowUp(isUp);
     };
+
+    const onSelect = (seasonId: unknown) => {
+        const chosenSeason = seasons.find((season) => season.id === seasonId);
+        if (chosenSeason) {
+            setEpisodes(chosenSeason.episodeList);
+        }
+    };
     return (
         <>
             <EpisodeTitleWrap>
                 <EpisodeMainTitle>剧集</EpisodeMainTitle>
-                <div>sss</div>
+                <Select defaultValue={defaultVal} onSelect={onSelect}>
+                    {seasons.map((item) => (
+                        <Select.Option value={item.id} key={item.id}>
+                            {item.seasonName}
+                        </Select.Option>
+                    ))}
+                </Select>
             </EpisodeTitleWrap>
             <EpisodeListWrap>
                 {showEpisodes.length > 0

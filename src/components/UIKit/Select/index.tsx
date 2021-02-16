@@ -1,10 +1,23 @@
+import RcSelect, { SelectProps } from 'rc-select';
+import './index.css';
 import React from 'react';
-import RcSelect, { SelectProps, Option } from 'rc-select';
-import 'rc-select/assets/index.less';
+import { Icon } from '..';
+import 'twin.macro';
 
-const Select: React.FC<SelectProps> = ({ ...rest }) => {
-    return <RcSelect />;
+interface SelectBaseComponent extends React.FC<SelectProps> {
+    Option: typeof RcSelect.Option;
+}
+
+const Select: SelectBaseComponent = ({ ...rest }) => {
+    return (
+        <RcSelect
+            transitionName="rc-select-dropdown-slide-up"
+            {...rest}
+            tw="h-11 text-xl inline-flex items-center max-w-7xl relative cursor-pointer"
+            inputIcon={<Icon name="arrow-down-s" tw="text-3xl" type="fill" />}
+        />
+    );
 };
+Select.Option = RcSelect.Option;
 
 export default Select;
-export { Option };
