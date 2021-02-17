@@ -19,6 +19,7 @@ const VodId = (): JSX.Element => {
     return (
         <>
             <Dialog
+                tw="md:w-10/12 lg:w-7/12 mx-auto"
                 destroyOnClose
                 visible={visible}
                 onClose={() => {
