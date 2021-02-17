@@ -11,10 +11,15 @@ export interface PosterProp {
 
 const PosterWrap = styled.div(({ aspectRatio = 1 / 1 }: PosterProp) => {
     return [
-        tw`bg-no-repeat bg-center flex-shrink-0 bg-cover relative bg-black`,
+        tw`bg-no-repeat bg-center flex-shrink-0 bg-cover relative bg-black rounded overflow-hidden`,
         css`
             aspect-ratio: ${aspectRatio};
-            padding-bottom: ${(1 / aspectRatio) * 100}%;
+            &:before {
+                content: '';
+                display: block;
+                width: 100%;
+                padding-top: ${(1 / aspectRatio) * 100}%;
+            }
         `,
     ];
 });
@@ -24,9 +29,9 @@ const Poster: React.FC<PosterProp> = ({ className, aspectRatio = 1 / 1, onClick,
         <PosterWrap className={className} aspectRatio={aspectRatio} onClick={onClick}>
             <Icon
                 name="film"
-                tw="text-6xl text-gray-600 absolute left-1/2 top-1/2  transform(-translate-x-1/2 -translate-y-1/2)"
+                tw="text-2xl md:text-3xl lg:text-4xl text-white text-opacity-25 absolute left-1/2 top-1/2  transform(-translate-x-1/2 -translate-y-1/2)"
             />
-            <img src={src} alt={src} tw="z-0 top-0 w-full h-full left-0" />
+            <img src={src} alt={src} tw="z-10 top-0 w-full h-full left-0 absolute" />
             {children}
         </PosterWrap>
     );

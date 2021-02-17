@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Button, Icon, Select } from '@/components/UIKit';
+import { Button, Icon, Select, Poster } from '@/components/UIKit';
 import 'twin.macro';
 
 import {
@@ -71,16 +71,8 @@ const EpisodePaginationContainer: React.FC<EpisodePagination> = ({ seasonSize, o
 
 const Episodes: React.FC<EpisodesProps> = ({ seasons }) => {
     const [episodes, setEpisodes] = useState<EpisodeItem[]>([]);
-    const [defaultVal, setDefaultVal] = useState<string>('');
 
     const [isShowUp, setShowUp] = useState<boolean>(false);
-
-    useEffect(() => {
-        if (seasons.length > 0) {
-            const firstSeason = seasons[0];
-            setDefaultVal(firstSeason?.id);
-        }
-    }, [seasons]);
 
     const showEpisodes = useMemo(() => {
         if (episodes.length > PAGE_SIZE) {
@@ -88,6 +80,10 @@ const Episodes: React.FC<EpisodesProps> = ({ seasons }) => {
         }
         return episodes;
     }, [episodes, isShowUp]);
+
+    useEffect(() => {
+        setEpisodes(seasons[0].episodeList);
+    }, [seasons]);
 
     const onEpisodePagination = (isUp: boolean) => {
         setShowUp(isUp);
@@ -103,13 +99,24 @@ const Episodes: React.FC<EpisodesProps> = ({ seasons }) => {
         <>
             <EpisodeTitleWrap>
                 <EpisodeMainTitle>剧集</EpisodeMainTitle>
-                <Select defaultValue={defaultVal} onSelect={onSelect}>
-                    {seasons.map((item) => (
-                        <Select.Option value={item.id} key={item.id}>
-                            {item.seasonName}
-                        </Select.Option>
-                    ))}
-                </Select>
+                {seasons.length > 1 ? (
+                    <Select
+                        menuItemSelectedIcon=""
+                        defaultValue={seasons[0].id}
+                        onSelect={onSelect}
+                        getPopupContainer={(trigger: Node) => {
+                            return trigger.parentNode as HTMLElement;
+                        }}
+                    >
+                        {seasons.map((item) => (
+                            <Select.Option value={item.id} key={item.id}>
+                                {item.seasonName}
+                            </Select.Option>
+                        ))}
+                    </Select>
+                ) : (
+                    <EpisodeMainTitle>限定剧集</EpisodeMainTitle>
+                )}
             </EpisodeTitleWrap>
             <EpisodeListWrap>
                 {showEpisodes.length > 0
@@ -117,7 +124,7 @@ const Episodes: React.FC<EpisodesProps> = ({ seasons }) => {
                           return (
                               <EpisodeItem key={item.episodeNumber}>
                                   <EpisodeNumber>{item.episodeNumber}</EpisodeNumber>
-                                  <EpisodePoster background={item.poster} />
+                                  <Poster src={item.poster} aspectRatio={16 / 9} tw="w-20 mr-3 md:w-32 lg:w-40" />
                                   <EpisodeInfo>
                                       <EpisodeTitle>
                                           <span>{item.title}</span>
