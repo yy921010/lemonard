@@ -8,7 +8,6 @@ import {
     EpisodeInfo,
     EpisodeItem,
     EpisodeNumber,
-    EpisodePoster,
     EpisodeTitle,
     EpisodeTitleWrap,
     EpisodeListWrap,
@@ -127,8 +126,8 @@ const Episodes: React.FC<EpisodesProps> = ({ seasons }) => {
                                   <Poster src={item.poster} aspectRatio={16 / 9} tw="w-20 mr-3 md:w-32 lg:w-40" />
                                   <EpisodeInfo>
                                       <EpisodeTitle>
-                                          <span>{item.title}</span>
-                                          <span>{item.playDuration}</span>
+                                          <h2>{item.title}</h2>
+                                          <h4>{item.playDuration}</h4>
                                       </EpisodeTitle>
                                       <EpisodeDescription>{item.description}</EpisodeDescription>
                                   </EpisodeInfo>

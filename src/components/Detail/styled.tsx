@@ -15,8 +15,8 @@ export const VodBackground = styled.div(({ background }: BackgroundProps) => [
 export const PreModalInfo = styled.div(() => [tw`w-full absolute top-0 left-0 h-full p-6`]);
 
 export const VodTitle = tw.div`absolute bottom-28 md:bottom-40`;
-export const Title = tw.div`text-3xl md:text-4xl`;
-export const SubTitle = tw.div`text-xs md:text-base text-gray-400`;
+export const Title = tw.h1`text-3xl md:text-4xl`;
+export const SubTitle = tw.h4`text-xs md:text-base text-gray-400`;
 
 export const VodAction = tw.div`flex space-x-6 absolute bottom-16 md:bottom-20`;
 
@@ -33,7 +33,7 @@ export const VodMetaTag = tw.div`flex space-x-4 mb-2.5 flex-wrap`;
 export const VodMetaTagLabel = tw.div`text-gray-500`;
 export const VodMetaTagItems = tw.div``;
 
-export const EpisodeItem = styled.div(() => [
+export const EpisodeItem = styled.li(() => [
     tw`flex px-10 w-full h-40 overflow-hidden items-center cursor-pointer border-b border-gray-600
      hover:(bg-white bg-opacity-10)`,
 ]);
@@ -53,8 +53,8 @@ export const EpisodeInfo = tw.div`w-full`;
 export const EpisodeTitle = tw.div`flex justify-between md:text-xl`;
 export const EpisodeDescription = tw.div`text-xs md:text-sm text-gray-400`;
 export const EpisodeDuration = tw.div``;
-export const EpisodeMainTitle = tw.div`text-2xl`;
-export const EpisodeTitleWrap = tw.div`flex justify-between px-6 mt-10 h-14 border-b border-gray-600`;
-export const EpisodeListWrap = tw.div``;
+export const EpisodeMainTitle = tw.h2`text-2xl`;
+export const EpisodeTitleWrap = tw.section`flex justify-between px-6 mt-10 h-14 border-b border-gray-600`;
+export const EpisodeListWrap = tw.ul``;
 
 export const EpisodeNextButton = tw.div`text-center -mt-6`;
