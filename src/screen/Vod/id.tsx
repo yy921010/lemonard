@@ -1,21 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import 'twin.macro';
 
 import { Poster, Dialog, Button, Icon } from '@/components/UIKit';
-import { Detail } from '@/components';
-import vodInfo from './vodinof';
+import { Detail, DetailProps } from '@/components';
 
 /**
  * 组件命名需要大写命名
  */
 const VodId = (): JSX.Element => {
     const [visible, setVisible] = useState<boolean>(false);
+    const [vodInfo, setVodInfo] = useState<DetailProps>({
+        title: '',
+        tags: [],
+    });
     const showDialog = () => {
         setVisible(true);
     };
+
+    useEffect(() => {
+        fetch('/vod-info')
+            .then((resp) => {
+                return resp!.json();
+            })
+            .then((data) => {
+                setVodInfo(data);
+                console.log('data--->', data);
+            });
+    }, []);
+
     return (
         <>
             <Dialog

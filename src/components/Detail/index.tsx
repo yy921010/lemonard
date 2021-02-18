@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Icon } from '@/components/UIKit';
+import { useTitle } from 'ahooks';
 import Episodes, { Season } from './episodes';
 import {
     VodBackground,
@@ -30,7 +31,7 @@ interface Tag {
 }
 
 export interface DetailProps {
-    poster: string;
+    poster?: string;
     title: string;
     subTitle?: string;
     rate?: string;
@@ -52,6 +53,7 @@ const Detail: React.FC<DetailProps> = ({
     tags,
     seasons,
 }) => {
+    useTitle(title);
     return (
         <>
             <VodBackground background={poster}>

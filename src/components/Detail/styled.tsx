@@ -37,7 +37,12 @@ export const EpisodeItem = styled.li(() => [
     tw`flex px-10 w-full h-40 overflow-hidden items-center cursor-pointer border-b border-gray-600
      hover:(bg-white bg-opacity-10)`,
 ]);
-export const EpisodeNumber = tw.div`text-3xl mr-4 text-gray-400`;
+export const EpisodeNumber = styled.h1(() => [
+    tw`text-3xl mr-4 text-gray-400`,
+    css`
+        min-width: 50px;
+    `,
+]);
 
 export const EpisodePoster = styled.div(({ background }: BackgroundProps) => [
     tw`bg-no-repeat bg-cover bg-center mr-4 h-20`,

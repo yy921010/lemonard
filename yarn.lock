@@ -3459,6 +3459,11 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
+commander@*:
+  version "7.1.0"
+  resolved "https://registry.npm.taobao.org/commander/download/commander-7.1.0.tgz?cache=0&sync_timestamp=1613374024216&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcommander%2Fdownload%2Fcommander-7.1.0.tgz#f2eaecf131f10e36e07d894698226e36ae0eb5ff"
+  integrity sha1-8urs8THxDjbgfYlGmCJuNq4Otf8=
+
 commander@^2.11.0, commander@^2.20.0:
   version "2.20.3"
   resolved "https://registry.npmjs.org/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
@@ -7994,6 +7999,13 @@ mixin-object@^2.0.1:
   dependencies:
     minimist "^1.2.5"
 
+mockjs@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/mockjs/download/mockjs-1.1.0.tgz#e6a0c378e91906dbaff20911cc0273b3c7d75b06"
+  integrity sha1-5qDDeOkZBtuv8gkRzAJzs8fXWwY=
+  dependencies:
+    commander "*"
+
 modern-normalize@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/modern-normalize/-/modern-normalize-1.0.0.tgz#539d84a1e141338b01b346f3e27396d0ed17601e"
@@ -11928,6 +11940,11 @@ typescript@~3.7.2:
   version "3.7.5"
   resolved "https://registry.npmjs.org/typescript/-/typescript-3.7.5.tgz#0692e21f65fd4108b9330238aac11dd2e177a1ae"
   integrity sha512-/P5lkRXkWHNAbcJIiHPfRoKqyd7bsyCma1hZNUGfn20qm64T6ZBlrzprymeu918H+mB/0rIg2gGK/BXkhhYgBw==
+
+umi-mock-middleware@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/umi-mock-middleware/download/umi-mock-middleware-1.0.0.tgz#a4a12bb8542445dc8f1d5f80391fd56416d02ac5"
+  integrity sha1-pKEruFQkRdyPHV+AOR/VZBbQKsU=
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"
