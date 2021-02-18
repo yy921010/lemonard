@@ -30,7 +30,7 @@ interface Tag {
     tagItems: TagItem[];
 }
 
-export interface DetailProps {
+export interface VodInfo {
     poster?: string;
     title: string;
     subTitle?: string;
@@ -42,17 +42,7 @@ export interface DetailProps {
     seasons?: Season[];
 }
 
-const Detail: React.FC<DetailProps> = ({
-    poster,
-    title,
-    subTitle,
-    rate,
-    language,
-    time,
-    description,
-    tags,
-    seasons,
-}) => {
+const Detail: React.FC<VodInfo> = ({ poster, title, subTitle, rate, language, time, description, tags, seasons }) => {
     useTitle(title);
     return (
         <>
