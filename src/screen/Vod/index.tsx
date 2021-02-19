@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Poster, SlickList } from '@/components/UIKit';
+import { Button, Icon, Poster, SlickList } from '@/components/UIKit';
 import { VodInfo } from '@/components';
 import tw, { css } from 'twin.macro';
 import styled from 'styled-components';
@@ -27,8 +27,53 @@ const Vod = (): JSX.Element => {
             : '',
     ]);
 
+    const MiniModal = tw.div`flex justify-center absolute top-0 left-0 will-change[scroll-position]`;
+
+    const ModalContainer = styled.div(({ width, top, left }: { width: number; top: number; left: number }) => [
+        tw`will-change[transform] absolute border overflow-hidden z-10 opacity-100 shadow-2xl box-border`,
+        css`
+            width: ${width}px;
+            top: ${top}px;
+            left: ${left}px;
+        `,
+    ]);
+
+    const PosterMask = tw.div`absolute top-0 left-0 z-10 h-full w-full bg-black bg-opacity-50 p-5 box-border`;
+
+    const PosterButtons = tw.div`absolute top-1 right-4 w-12 z-50 flex flex-col space-y-2 mt-4`;
+
     return (
-        <div>
+        <div
+            style={{
+                height: 800,
+                paddingTop: 180,
+            }}
+        >
+            <MiniModal>
+                <ModalContainer width={520} left={205} top={172}>
+                    <Poster
+                        src="https://occ-0-2772-3933.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABSEz2ZNn_8fcHrdCnW_dq2YzK-bfvWjPlwAvI_LjWIhTxGMj050uGMUUSTQTzjdEgd5JqobRFKeXeI2ju0m452goEGVgUiszovYGvWPAMUSffXWm1SGrmvk23qvJ.jpg?r=e80"
+                        aspectRatio={16 / 9}
+                    >
+                        <PosterMask>
+                            <div tw="text-2xl mt-32">big main Title</div>
+                            <span tw="text-base">rating</span>
+                            <div tw="text-sm">big main Title | meta data | year</div>
+                        </PosterMask>
+                        <PosterButtons>
+                            <Button circle>
+                                <Icon name="play" type="fill" />
+                            </Button>
+                            <Button circle>
+                                <Icon name="volume-mute" type="fill" />
+                            </Button>
+                            <Button circle>
+                                <Icon name="arrow-down-s" />
+                            </Button>
+                        </PosterButtons>
+                    </Poster>
+                </ModalContainer>
+            </MiniModal>
             <SlickList key="sss" id="sss" title="我的列表" onMore={() => {}}>
                 {vodList.length > 0 ? (
                     vodList.map((item) => {
@@ -38,7 +83,7 @@ const Vod = (): JSX.Element => {
                                     <Poster
                                         src={item.poster}
                                         aspectRatio={16 / 9}
-                                        tw="mr-1 sm:mr-2 md:mr-3 mb-2"
+                                        tw="mx-0.5 sm:mx-1 md:mx-1.5 mb-2"
                                         onClick={() => {
                                             // onSlick(item.id);
                                         }}

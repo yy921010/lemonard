@@ -25,7 +25,7 @@ const SlickListWrap = tw.div`md:px-8 box-border overflow-hidden my-4`;
 
 function SlickList({ title, id, onMore, children }: SlickProps): JSX.Element {
     const settings = {
-        dots: true,
+        dots: false,
         infinite: false,
         speed: 500,
         slidesToShow: 6,
