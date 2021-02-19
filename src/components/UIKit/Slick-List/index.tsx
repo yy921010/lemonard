@@ -1,5 +1,5 @@
 import React from 'react';
-import { Slick, Poster, Icon } from '@/components/UIKit';
+import { Slick, Icon } from '@/components/UIKit';
 import tw from 'twin.macro';
 
 export interface SlickItem {
@@ -11,8 +11,7 @@ export interface SlickItem {
 export interface SlickProps {
     id: string;
     title: string;
-    slicks: SlickItem[];
-    onSlick: (id: string) => void;
+    children?: React.ReactNode;
     onMore: (id: string) => void;
 }
 
@@ -22,21 +21,24 @@ const SlickTitle = tw.h1`text-base md:text-2xl `;
 
 const SlickAll = tw.div`text-sm md:text-base flex items-center`;
 
-const SlickListWrap = tw.div`px-16 box-border overflow-hidden my-4`;
+const SlickListWrap = tw.div`md:px-8 box-border overflow-hidden my-4`;
 
-const SlickItemTitle = tw.h4`text-sm md:text-xl`;
-
-const SlickItemWrap = tw.div``;
-
-const SlickList: React.FC<SlickProps> = ({ title, slicks, id, onSlick, onMore }) => {
+function SlickList({ title, id, onMore, children }: SlickProps): JSX.Element {
     const settings = {
-        dots: false,
+        dots: true,
         infinite: false,
         speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 5,
+        slidesToShow: 6,
+        slidesToScroll: 6,
         initialSlide: 0,
         responsive: [
+            {
+                breakpoint: 1280,
+                settings: {
+                    slidesToShow: 5,
+                    slidesToScroll: 5,
+                },
+            },
             {
                 breakpoint: 1024,
                 settings: {
@@ -53,6 +55,7 @@ const SlickList: React.FC<SlickProps> = ({ title, slicks, id, onSlick, onMore })
             },
         ],
     };
+
     return (
         <SlickListWrap>
             <SlickHeaderWrap>
@@ -66,25 +69,9 @@ const SlickList: React.FC<SlickProps> = ({ title, slicks, id, onSlick, onMore })
                     浏览全部
                 </SlickAll>
             </SlickHeaderWrap>
-            <Slick {...settings}>
-                {slicks.map((item) => {
-                    return (
-                        <SlickItemWrap key={item.id}>
-                            <Poster
-                                src={item.picUrl}
-                                aspectRatio={16 / 9}
-                                tw="mr-4 mb-2"
-                                onClick={() => {
-                                    onSlick(item.id);
-                                }}
-                            />
-                            <SlickItemTitle>{item.title}</SlickItemTitle>
-                        </SlickItemWrap>
-                    );
-                })}
-            </Slick>
+            <Slick {...settings}>{children}</Slick>
         </SlickListWrap>
     );
-};
+}
 
 export default SlickList;

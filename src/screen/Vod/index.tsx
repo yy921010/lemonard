@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { SlickItem, SlickList, Slick, Poster } from '@/components/UIKit';
+import { Poster, SlickList } from '@/components/UIKit';
 import { VodInfo } from '@/components';
-import 'twin.macro';
+import tw, { css } from 'twin.macro';
+import styled from 'styled-components';
 
 const Vod = (): JSX.Element => {
     const [vodList, setVodList] = useState<VodInfo[]>([]);
@@ -12,62 +13,52 @@ const Vod = (): JSX.Element => {
                 setVodList(data.vodList);
             });
     }, []);
-    const settings = {
-        dots: false,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 5,
-        initialSlide: 0,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 4,
-                },
-            },
-            {
-                breakpoint: 758,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                },
-            },
-        ],
-    };
+
+    const SlickSkeleton = tw.div``;
+
+    const SlickPosterWrap = styled.div(({ isHover }: { isHover?: boolean }) => [
+        isHover
+            ? css`
+                  box-shadow: 0 5px 9px 0 rgb(0 0 0 / 50%);
+                  margin: calc((56.25% - 292px) / 2) calc(50% - 260px);
+                  width: 520px;
+                  z-index: 1;
+              `
+            : '',
+    ]);
+
     return (
         <div>
-            <SlickList
-                key="sss"
-                id="sss"
-                title="我的列表"
-                onMore={() => {}}
-                onSlick={() => {}}
-                slicks={vodList.map((item) => {
-                    return {
-                        picUrl: item.poster,
-                        title: item.title,
-                        id: item.title,
-                    } as SlickItem;
-                })}
-            />
-            <Slick {...settings}>
+            <SlickList key="sss" id="sss" title="我的列表" onMore={() => {}}>
                 {vodList.length > 0 ? (
                     vodList.map((item) => {
-                        return <Poster src={item.poster} key={item.title} aspectRatio={16 / 9} />;
+                        return (
+                            <div key={item.title} tw="cursor-pointer">
+                                <SlickPosterWrap>
+                                    <Poster
+                                        src={item.poster}
+                                        aspectRatio={16 / 9}
+                                        tw="mr-1 sm:mr-2 md:mr-3 mb-2"
+                                        onClick={() => {
+                                            // onSlick(item.id);
+                                        }}
+                                    />
+                                </SlickPosterWrap>
+                                <h4 tw="text-sm md:text-xl">{item.title}</h4>
+                            </div>
+                        );
                     })
                 ) : (
                     <>
-                        <h1>s</h1>
-                        <h1>s</h1>
-                        <h1>s</h1>
-                        <h1>s</h1>
-                        <h1>s</h1>
-                        <h1>s</h1>
+                        {Array(5)
+                            .fill('.')
+                            .map((_, index) => {
+                                const renderId = `${index}id`;
+                                return <SlickSkeleton key={renderId} />;
+                            })}
                     </>
                 )}
-            </Slick>
+            </SlickList>
         </div>
     );
 };
