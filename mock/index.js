@@ -42,7 +42,7 @@ module.exports = {
         time:mockjs.Random.time('yyyy'),
         rate: '9.3',
         description:'@cparagraph(1,3)',
-        poster: mockjs.Random.image('160x90'),
+        poster: mockjs.Random.image('160x90',mockjs.Random.color()),
         'language|1' :['英语','法语','中文'],
         'tags|1-4':[{
           tagName:'@cname',

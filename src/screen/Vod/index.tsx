@@ -28,11 +28,16 @@ const ModalContainer = styled.div(({ width, top, left }: { width: number; top: n
     `,
 ]);
 
-const PosterMask = tw.div`absolute top-0 left-0 z-10 h-full w-full bg-black bg-opacity-50 p-5 box-border`;
+const PosterMask = tw.div`absolute top-0 left-0 z-10 h-full w-full bg-opacity-50 p-5 box-border bg-gradient-to-b from-transparent  to-black bg-opacity-50`;
 
 const PosterButtons = tw.div`absolute top-1 right-4 w-12 z-50 flex flex-col space-y-2 mt-4`;
 
 const Vod = (): JSX.Element => {
+    const [isShowModal, setShowModal] = useState<boolean>(false);
+    const [positionModal, setPositionModal] = useState<{
+        left: number;
+        top: number;
+    }>({ left: 0, top: 0 });
     const [vodList, setVodList] = useState<VodInfo[]>([]);
     useEffect(() => {
         fetch('vod-list')
@@ -42,7 +47,46 @@ const Vod = (): JSX.Element => {
             });
     }, []);
 
-    const onMouseOverHandle = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {};
+    const onMouseEnterHandle = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        setShowModal(true);
+        const boundingClientRect = event.currentTarget.getBoundingClientRect();
+        const browserWidth = window.outerWidth;
+        if (boundingClientRect) {
+            const { left, top } = boundingClientRect;
+            let finalLeft: number = left - 80;
+            if (left <= 50) {
+                finalLeft = left;
+            } else if (browserWidth <= 758) {
+                const maxLeft = boundingClientRect.width * 2;
+                if (left >= maxLeft) {
+                    finalLeft = left - 150;
+                }
+            } else if (browserWidth > 758 && browserWidth <= 1024) {
+                const maxLeft = boundingClientRect.width * 3;
+                if (left >= maxLeft) {
+                    finalLeft = left - 180;
+                }
+            } else if (browserWidth > 758 && browserWidth <= 1280) {
+                const maxLeft = boundingClientRect.width * 4;
+                if (left >= maxLeft) {
+                    finalLeft = left - 180;
+                }
+            } else if (browserWidth > 1280) {
+                const maxLeft = boundingClientRect.width * 5;
+                if (left >= maxLeft) {
+                    finalLeft = left - 100;
+                }
+            }
+            setPositionModal({
+                left: finalLeft,
+                top: top + document.documentElement.scrollTop - 40,
+            });
+        }
+
+        event.preventDefault();
+        console.log(event.currentTarget.getBoundingClientRect());
+    };
+
     return (
         <div
             style={{
@@ -50,45 +94,73 @@ const Vod = (): JSX.Element => {
                 paddingTop: 180,
             }}
         >
-            <MiniModal>
-                <ModalContainer width={520} left={205} top={172}>
-                    <Poster
-                        src="https://occ-0-2772-3933.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABSEz2ZNn_8fcHrdCnW_dq2YzK-bfvWjPlwAvI_LjWIhTxGMj050uGMUUSTQTzjdEgd5JqobRFKeXeI2ju0m452goEGVgUiszovYGvWPAMUSffXWm1SGrmvk23qvJ.jpg?r=e80"
-                        aspectRatio={16 / 9}
+            {isShowModal ? (
+                <MiniModal>
+                    <ModalContainer
+                        width={400}
+                        left={positionModal.left}
+                        top={positionModal.top}
+                        onMouseLeave={() => {
+                            setShowModal(false);
+                        }}
                     >
-                        <PosterMask>
-                            <div tw="text-2xl mt-32">big main Title</div>
-                            <span tw="text-base">rating</span>
-                            <div tw="text-sm">big main Title | meta data | year</div>
-                        </PosterMask>
-                        <PosterButtons>
-                            <Button circle>
-                                <Icon name="play" type="fill" />
-                            </Button>
-                            <Button circle>
-                                <Icon name="volume-mute" type="fill" />
-                            </Button>
-                            <Button circle>
-                                <Icon name="arrow-down-s" />
-                            </Button>
-                        </PosterButtons>
-                    </Poster>
-                </ModalContainer>
-            </MiniModal>
+                        <Poster
+                            src="https://occ-0-2772-3933.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABSEz2ZNn_8fcHrdCnW_dq2YzK-bfvWjPlwAvI_LjWIhTxGMj050uGMUUSTQTzjdEgd5JqobRFKeXeI2ju0m452goEGVgUiszovYGvWPAMUSffXWm1SGrmvk23qvJ.jpg?r=e80"
+                            aspectRatio={16 / 9}
+                        >
+                            <PosterMask>
+                                <div tw="text-2xl mt-32">big main Title</div>
+                                <span tw="text-base">rating</span>
+                                <div tw="text-sm">big main Title | meta data | year</div>
+                            </PosterMask>
+                            <PosterButtons>
+                                <Button circle>
+                                    <Icon name="play" type="fill" />
+                                </Button>
+                                <Button circle>
+                                    <Icon name="volume-mute" type="fill" />
+                                </Button>
+                                <Button circle>
+                                    <Icon name="arrow-down-s" />
+                                </Button>
+                            </PosterButtons>
+                        </Poster>
+                    </ModalContainer>
+                </MiniModal>
+            ) : (
+                ''
+            )}
+
             <SlickList key="sss" id="sss" title="我的列表" onMore={() => {}}>
                 {vodList.length > 0 ? (
                     vodList.map((item) => {
                         return (
                             <div key={item.title} tw="cursor-pointer">
-                                <SlickPosterWrap onMouseOver={onMouseOverHandle}>
-                                    <Poster
-                                        src={item.poster}
-                                        aspectRatio={16 / 9}
-                                        tw="mx-0.5 sm:mx-1 md:mx-1.5 mb-2"
-                                        onClick={() => {
-                                            // onSlick(item.id);
-                                        }}
-                                    />
+                                <SlickPosterWrap onMouseEnter={onMouseEnterHandle}>
+                                    <Poster src={item.poster} aspectRatio={16 / 9} tw="mx-0.5 sm:mx-1 md:mx-1.5 mb-2" />
+                                </SlickPosterWrap>
+                                <h4 tw="text-sm md:text-xl">{item.title}</h4>
+                            </div>
+                        );
+                    })
+                ) : (
+                    <>
+                        {Array(5)
+                            .fill('.')
+                            .map((_, index) => {
+                                const renderId = `${index}id`;
+                                return <SlickSkeleton key={renderId} />;
+                            })}
+                    </>
+                )}
+            </SlickList>
+            <SlickList key="sss1" id="sss1" title="我的列表" onMore={() => {}}>
+                {vodList.length > 0 ? (
+                    vodList.map((item) => {
+                        return (
+                            <div key={item.title} tw="cursor-pointer">
+                                <SlickPosterWrap onMouseEnter={onMouseEnterHandle}>
+                                    <Poster src={item.poster} aspectRatio={16 / 9} tw="mx-0.5 sm:mx-1 md:mx-1.5 mb-2" />
                                 </SlickPosterWrap>
                                 <h4 tw="text-sm md:text-xl">{item.title}</h4>
                             </div>
