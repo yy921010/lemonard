@@ -4,6 +4,34 @@ import { VodInfo } from '@/components';
 import tw, { css } from 'twin.macro';
 import styled from 'styled-components';
 
+const SlickSkeleton = tw.div``;
+
+const SlickPosterWrap = styled.div(({ isHover }: { isHover?: boolean }) => [
+    isHover
+        ? css`
+              box-shadow: 0 5px 9px 0 rgb(0 0 0 / 50%);
+              margin: calc((56.25% - 292px) / 2) calc(50% - 260px);
+              width: 520px;
+              z-index: 1;
+          `
+        : '',
+]);
+
+const MiniModal = tw.div`flex justify-center absolute top-0 left-0 will-change[scroll-position]`;
+
+const ModalContainer = styled.div(({ width, top, left }: { width: number; top: number; left: number }) => [
+    tw`will-change[transform] absolute border overflow-hidden z-10 opacity-100 shadow-2xl box-border`,
+    css`
+        width: ${width}px;
+        top: ${top}px;
+        left: ${left}px;
+    `,
+]);
+
+const PosterMask = tw.div`absolute top-0 left-0 z-10 h-full w-full bg-black bg-opacity-50 p-5 box-border`;
+
+const PosterButtons = tw.div`absolute top-1 right-4 w-12 z-50 flex flex-col space-y-2 mt-4`;
+
 const Vod = (): JSX.Element => {
     const [vodList, setVodList] = useState<VodInfo[]>([]);
     useEffect(() => {
@@ -14,34 +42,7 @@ const Vod = (): JSX.Element => {
             });
     }, []);
 
-    const SlickSkeleton = tw.div``;
-
-    const SlickPosterWrap = styled.div(({ isHover }: { isHover?: boolean }) => [
-        isHover
-            ? css`
-                  box-shadow: 0 5px 9px 0 rgb(0 0 0 / 50%);
-                  margin: calc((56.25% - 292px) / 2) calc(50% - 260px);
-                  width: 520px;
-                  z-index: 1;
-              `
-            : '',
-    ]);
-
-    const MiniModal = tw.div`flex justify-center absolute top-0 left-0 will-change[scroll-position]`;
-
-    const ModalContainer = styled.div(({ width, top, left }: { width: number; top: number; left: number }) => [
-        tw`will-change[transform] absolute border overflow-hidden z-10 opacity-100 shadow-2xl box-border`,
-        css`
-            width: ${width}px;
-            top: ${top}px;
-            left: ${left}px;
-        `,
-    ]);
-
-    const PosterMask = tw.div`absolute top-0 left-0 z-10 h-full w-full bg-black bg-opacity-50 p-5 box-border`;
-
-    const PosterButtons = tw.div`absolute top-1 right-4 w-12 z-50 flex flex-col space-y-2 mt-4`;
-
+    const onMouseOverHandle = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {};
     return (
         <div
             style={{
@@ -79,7 +80,7 @@ const Vod = (): JSX.Element => {
                     vodList.map((item) => {
                         return (
                             <div key={item.title} tw="cursor-pointer">
-                                <SlickPosterWrap>
+                                <SlickPosterWrap onMouseOver={onMouseOverHandle}>
                                     <Poster
                                         src={item.poster}
                                         aspectRatio={16 / 9}
