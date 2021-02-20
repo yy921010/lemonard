@@ -59,3 +59,4 @@ craco.config.js
 tailwind.config.js
 babel-plugin-macros.config.js
 mock/*
+serviceWorker.ts
