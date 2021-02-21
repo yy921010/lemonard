@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { GlobalStyles } from '@/components';
+import { UseRequestProvider } from 'ahooks';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './i18n';
@@ -10,7 +11,16 @@ import 'remixicon/fonts/remixicon.css';
 ReactDOM.render(
     <BrowserRouter>
         <GlobalStyles />
-        <App />
+        <UseRequestProvider
+            value={{
+                refreshOnWindowFocus: false,
+                onError(error: Error) {
+                    console.log(error);
+                },
+            }}
+        >
+            <App />
+        </UseRequestProvider>
     </BrowserRouter>,
     document.getElementById('root'),
 );

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import 'twin.macro';
 import { Icon } from '@/components/UIKit';
+import { useRequest } from 'ahooks';
 import {
     Nav,
     NavContainer,
@@ -13,27 +14,16 @@ import {
     MainMenuItem,
 } from './styled';
 
-const menus = [
-    {
-        url: '/home',
-        text: '主页',
-        id: '2',
-    },
-    {
-        url: '/film',
-        text: '电影',
-        id: '4',
-    },
-    {
-        url: '/series',
-        text: '电视剧',
-        id: '1',
-    },
-];
+export interface Menu {
+    id: string;
+    title: string;
+    isMain: number;
+}
 
 const NavBar: React.FC = () => {
     const [bgBlackNumber, setBgBlackNumber] = useState<number>(0);
     const [isShowMenu, setShowMenu] = useState<boolean>(false);
+    const { data } = useRequest<Menu[]>('/menu');
 
     const run = () => {
         if (window.pageYOffset < 80) {
@@ -70,20 +60,22 @@ const NavBar: React.FC = () => {
                 <Icon name="menu" tw="text-2xl cursor-pointer text-gray-50 lg:hidden" onClick={handleShowMenu} />
                 <img tw="w-16" src="/img/logo.png" alt="logo" />
                 <MainMenus>
-                    {menus &&
-                        menus.map((item) => {
-                            return (
-                                <MainMenuItem
-                                    key={item.id}
-                                    onClick={(event) => {
-                                        targetPages(item.url);
-                                        event.stopPropagation();
-                                    }}
-                                >
-                                    {item.text}
-                                </MainMenuItem>
-                            );
-                        })}
+                    {data &&
+                        data
+                            .filter((item) => item.isMain)
+                            .map((item) => {
+                                return (
+                                    <MainMenuItem
+                                        key={item.id}
+                                        onClick={(event) => {
+                                            // targetPages(item.url);
+                                            event.stopPropagation();
+                                        }}
+                                    >
+                                        {item.title}
+                                    </MainMenuItem>
+                                );
+                            })}
                 </MainMenus>
                 {!isShowMenu ? (
                     <Icon name="search" tw="text-2xl cursor-pointer text-gray-50" onClick={handleSearch} />
@@ -102,20 +94,22 @@ const NavBar: React.FC = () => {
                             <img tw="w-16" src="/img/logo.png" alt="logo" />
                         </TopLogo>
                         <MenuList>
-                            {menus &&
-                                menus.map((item) => {
-                                    return (
-                                        <MenuItem
-                                            key={item.id}
-                                            onClick={(event: { stopPropagation: () => void }) => {
-                                                targetPages(item.url);
-                                                event.stopPropagation();
-                                            }}
-                                        >
-                                            {item.text}
-                                        </MenuItem>
-                                    );
-                                })}
+                            {data &&
+                                data
+                                    .filter((item) => item.isMain)
+                                    .map((item) => {
+                                        return (
+                                            <MenuItem
+                                                key={item.id}
+                                                onClick={(event: { stopPropagation: () => void }) => {
+                                                    // targetPages(item.url);
+                                                    event.stopPropagation();
+                                                }}
+                                            >
+                                                {item.title}
+                                            </MenuItem>
+                                        );
+                                    })}
                         </MenuList>
                     </SideBarTop>
                 </NavSideBar>

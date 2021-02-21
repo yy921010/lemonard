@@ -3,7 +3,7 @@ import React from 'react';
 
 const footer: React.FC = () => {
     return (
-        <footer tw="border-gray-900 w-full h-72 border-solid border-t-2 mt-10  pt-6 bg-black px-6">
+        <footer tw="border-gray-900 w-full h-72 border-solid border-t-2 pt-6 bg-black px-6">
             <div tw="container flex flex-col items-center mx-auto">
                 <div tw="w-20 h-12">
                     <img src="/logo.png" alt="" tw="w-20" />

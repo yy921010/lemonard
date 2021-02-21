@@ -4,6 +4,7 @@ import { VodInfo } from '@/components';
 import tw, { css, styled } from 'twin.macro';
 import { CSSTransition } from 'react-transition-group';
 import './index.css';
+import { useRequest } from 'ahooks';
 
 const SlickSkeleton = tw.div``;
 
@@ -32,6 +33,8 @@ const ModalContainer = styled.div(({ width, top, left }: { width: number; top: n
 const PosterMask = tw.div`absolute top-0 left-0 z-10 h-full w-full bg-opacity-50 p-5 box-border bg-gradient-to-b from-transparent  to-black bg-opacity-50`;
 
 const PosterButtons = tw.div`absolute top-1 right-4 w-12 z-50 flex flex-col space-y-2 mt-4`;
+
+const PosterWall = tw.div`grid grid-cols-3 gap-y-8 md:(px-6 grid-cols-4) lg:(grid-cols-5) xl:grid-cols-6`;
 
 const Vod = (): JSX.Element => {
     const [isShowModal, setShowModal] = useState<boolean>(false);
@@ -87,16 +90,14 @@ const Vod = (): JSX.Element => {
         }
 
         event.preventDefault();
-        console.log(event.currentTarget.getBoundingClientRect());
     };
 
     return (
-        <div
-            style={{
-                height: 800,
-                paddingTop: 180,
-            }}
-        >
+        <div>
+            <Poster
+                src="https://occ-0-2772-3933.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABSEz2ZNn_8fcHrdCnW_dq2YzK-bfvWjPlwAvI_LjWIhTxGMj050uGMUUSTQTzjdEgd5JqobRFKeXeI2ju0m452goEGVgUiszovYGvWPAMUSffXWm1SGrmvk23qvJ.jpg?r=e80"
+                aspectRatio={16 / 9}
+            />
             <CSSTransition in={isShowModal} timeout={200} classNames="fade" unmountOnExit>
                 <MiniModal>
                     <ModalContainer
@@ -178,6 +179,18 @@ const Vod = (): JSX.Element => {
                     </>
                 )}
             </SlickList>
+            <PosterWall>
+                {vodList.map((item) => {
+                    return (
+                        <div key={item.title} tw="cursor-pointer">
+                            <SlickPosterWrap>
+                                <Poster src={item.poster} aspectRatio={16 / 9} tw="mx-0.5 sm:mx-1 md:mx-1.5 mb-2" />
+                            </SlickPosterWrap>
+                            <h4 tw="text-sm md:text-xl">{item.title}</h4>
+                        </div>
+                    );
+                })}
+            </PosterWall>
         </div>
     );
 };

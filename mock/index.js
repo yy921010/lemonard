@@ -35,7 +35,7 @@ module.exports = {
   },
   [`GET /vod-list`](req, res) {
     const mockData = mockjs.mock({
-      'vodList|1-30':[{
+      'vodList|30-100':[{
         id:'@guid',
         title:'@ctitle',
         subtitle:'@ctitle',
@@ -65,6 +65,16 @@ module.exports = {
       }]
     })
     res.json(mockData)
+  },
+  [`GET /menu`](req, res) {
+    const mockData = mockjs.mock({
+      'data|1-20':[{
+        id:'@guid',
+        title:'@ctitle',
+        'isMain|1': [1,0],
+      }]
+    })
+    res.json(mockData.data)
   }
 };
 
