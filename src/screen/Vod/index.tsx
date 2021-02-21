@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Icon, Poster, SlickList } from '@/components/UIKit';
 import { VodInfo } from '@/components';
-import tw, { css } from 'twin.macro';
-import styled from 'styled-components';
+import tw, { css, styled } from 'twin.macro';
+import { CSSTransition } from 'react-transition-group';
+import './index.css';
 
 const SlickSkeleton = tw.div``;
 
@@ -37,7 +38,8 @@ const Vod = (): JSX.Element => {
     const [positionModal, setPositionModal] = useState<{
         left: number;
         top: number;
-    }>({ left: 0, top: 0 });
+        width: number;
+    }>({ left: 0, top: 0, width: 0 });
     const [vodList, setVodList] = useState<VodInfo[]>([]);
     useEffect(() => {
         fetch('vod-list')
@@ -52,7 +54,7 @@ const Vod = (): JSX.Element => {
         const boundingClientRect = event.currentTarget.getBoundingClientRect();
         const browserWidth = window.outerWidth;
         if (boundingClientRect) {
-            const { left, top } = boundingClientRect;
+            const { left, top, width } = boundingClientRect;
             let finalLeft: number = left - 80;
             if (left <= 50) {
                 finalLeft = left;
@@ -78,6 +80,7 @@ const Vod = (): JSX.Element => {
                 }
             }
             setPositionModal({
+                width: width + 150,
                 left: finalLeft,
                 top: top + document.documentElement.scrollTop - 40,
             });
@@ -94,10 +97,10 @@ const Vod = (): JSX.Element => {
                 paddingTop: 180,
             }}
         >
-            {isShowModal ? (
+            <CSSTransition in={isShowModal} timeout={200} classNames="fade" unmountOnExit>
                 <MiniModal>
                     <ModalContainer
-                        width={400}
+                        width={positionModal.width}
                         left={positionModal.left}
                         top={positionModal.top}
                         onMouseLeave={() => {
@@ -127,9 +130,7 @@ const Vod = (): JSX.Element => {
                         </Poster>
                     </ModalContainer>
                 </MiniModal>
-            ) : (
-                ''
-            )}
+            </CSSTransition>
 
             <SlickList key="sss" id="sss" title="我的列表" onMore={() => {}}>
                 {vodList.length > 0 ? (
@@ -158,8 +159,8 @@ const Vod = (): JSX.Element => {
                 {vodList.length > 0 ? (
                     vodList.map((item) => {
                         return (
-                            <div key={item.title} tw="cursor-pointer">
-                                <SlickPosterWrap onMouseEnter={onMouseEnterHandle}>
+                            <div key={item.title}>
+                                <SlickPosterWrap tw="cursor-pointer transition-transform hover:(transform-gpu scale-150 z-auto)">
                                     <Poster src={item.poster} aspectRatio={16 / 9} tw="mx-0.5 sm:mx-1 md:mx-1.5 mb-2" />
                                 </SlickPosterWrap>
                                 <h4 tw="text-sm md:text-xl">{item.title}</h4>
