@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Button, Icon, Poster, SlickList } from '@/components/UIKit';
 import { VodInfo } from '@/components';
 import tw, { css, styled } from 'twin.macro';
-import { CSSTransition } from 'react-transition-group';
 import './index.css';
 import { useRequest } from 'ahooks';
 
@@ -98,40 +97,38 @@ const Vod = (): JSX.Element => {
                 src="https://occ-0-2772-3933.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABSEz2ZNn_8fcHrdCnW_dq2YzK-bfvWjPlwAvI_LjWIhTxGMj050uGMUUSTQTzjdEgd5JqobRFKeXeI2ju0m452goEGVgUiszovYGvWPAMUSffXWm1SGrmvk23qvJ.jpg?r=e80"
                 aspectRatio={16 / 9}
             />
-            <CSSTransition in={isShowModal} timeout={200} classNames="fade" unmountOnExit>
-                <MiniModal>
-                    <ModalContainer
-                        width={positionModal.width}
-                        left={positionModal.left}
-                        top={positionModal.top}
-                        onMouseLeave={() => {
-                            setShowModal(false);
-                        }}
+            <MiniModal>
+                <ModalContainer
+                    width={positionModal.width}
+                    left={positionModal.left}
+                    top={positionModal.top}
+                    onMouseLeave={() => {
+                        setShowModal(false);
+                    }}
+                >
+                    <Poster
+                        src="https://occ-0-2772-3933.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABSEz2ZNn_8fcHrdCnW_dq2YzK-bfvWjPlwAvI_LjWIhTxGMj050uGMUUSTQTzjdEgd5JqobRFKeXeI2ju0m452goEGVgUiszovYGvWPAMUSffXWm1SGrmvk23qvJ.jpg?r=e80"
+                        aspectRatio={16 / 9}
                     >
-                        <Poster
-                            src="https://occ-0-2772-3933.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABSEz2ZNn_8fcHrdCnW_dq2YzK-bfvWjPlwAvI_LjWIhTxGMj050uGMUUSTQTzjdEgd5JqobRFKeXeI2ju0m452goEGVgUiszovYGvWPAMUSffXWm1SGrmvk23qvJ.jpg?r=e80"
-                            aspectRatio={16 / 9}
-                        >
-                            <PosterMask>
-                                <div tw="text-2xl mt-32">big main Title</div>
-                                <span tw="text-base">rating</span>
-                                <div tw="text-sm">big main Title | meta data | year</div>
-                            </PosterMask>
-                            <PosterButtons>
-                                <Button circle>
-                                    <Icon name="play" type="fill" />
-                                </Button>
-                                <Button circle>
-                                    <Icon name="volume-mute" type="fill" />
-                                </Button>
-                                <Button circle>
-                                    <Icon name="arrow-down-s" />
-                                </Button>
-                            </PosterButtons>
-                        </Poster>
-                    </ModalContainer>
-                </MiniModal>
-            </CSSTransition>
+                        <PosterMask>
+                            <div tw="text-2xl mt-32">big main Title</div>
+                            <span tw="text-base">rating</span>
+                            <div tw="text-sm">big main Title | meta data | year</div>
+                        </PosterMask>
+                        <PosterButtons>
+                            <Button circle>
+                                <Icon name="play" type="fill" />
+                            </Button>
+                            <Button circle>
+                                <Icon name="volume-mute" type="fill" />
+                            </Button>
+                            <Button circle>
+                                <Icon name="arrow-down-s" />
+                            </Button>
+                        </PosterButtons>
+                    </Poster>
+                </ModalContainer>
+            </MiniModal>
 
             <SlickList key="sss" id="sss" title="我的列表" onMore={() => {}}>
                 {vodList.length > 0 ? (
