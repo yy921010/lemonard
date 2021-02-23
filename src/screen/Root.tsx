@@ -5,3 +5,4 @@ export { default as NotFound } from './NotFound';
 export { default as Live } from './Live';
 export { default as Vod } from './Vod';
 export { default as VodId } from './Vod/id';
+export { default as NavigatorId } from './Navigator/id';

@@ -41,7 +41,9 @@ const VodId = (): JSX.Element => {
                 <Detail {...vodInfo} />
             </Dialog>
             <Detail {...vodInfo} />
-            <Button onClick={showDialog}>open</Button>
+            <Button onClick={showDialog} animate={{ scale: 2 }}>
+                open
+            </Button>
         </>
     );
 };

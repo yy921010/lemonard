@@ -61,13 +61,7 @@ const NavBar: React.FC = () => {
                             .filter((item) => item.isMain)
                             .map((item) => {
                                 return (
-                                    <MainMenuItem
-                                        key={item.id}
-                                        onClick={(event) => {
-                                            // targetPages(item.url);
-                                            event.stopPropagation();
-                                        }}
-                                    >
+                                    <MainMenuItem to={`/navigator/${item.id}`} key={item.id}>
                                         {item.title}
                                     </MainMenuItem>
                                 );
