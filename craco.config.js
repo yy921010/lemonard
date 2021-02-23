@@ -1,12 +1,15 @@
-// const {} = require('@craco/craco');
 const path = require('path');
 const {whenProd} = require('@craco/craco');
 const { createMockMiddleware } = require("umi-mock-middleware");
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 module.exports = {
   webpack: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
+    plugins:[new ProgressBarPlugin({
+      complete:"█"
+    })]
   },
   babel: {
     plugins: [

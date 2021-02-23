@@ -3,7 +3,6 @@ import { Button, Icon, Poster, SlickList } from '@/components/UIKit';
 import { VodInfo } from '@/components';
 import tw, { css, styled } from 'twin.macro';
 import './index.css';
-import { useRequest } from 'ahooks';
 
 const SlickSkeleton = tw.div``;
 
@@ -36,7 +35,6 @@ const PosterButtons = tw.div`absolute top-1 right-4 w-12 z-50 flex flex-col spac
 const PosterWall = tw.div`grid grid-cols-3 gap-y-8 md:(px-6 grid-cols-4) lg:(grid-cols-5) xl:grid-cols-6`;
 
 const Vod = (): JSX.Element => {
-    const [isShowModal, setShowModal] = useState<boolean>(false);
     const [positionModal, setPositionModal] = useState<{
         left: number;
         top: number;
@@ -52,7 +50,6 @@ const Vod = (): JSX.Element => {
     }, []);
 
     const onMouseEnterHandle = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        setShowModal(true);
         const boundingClientRect = event.currentTarget.getBoundingClientRect();
         const browserWidth = window.outerWidth;
         if (boundingClientRect) {
@@ -102,9 +99,7 @@ const Vod = (): JSX.Element => {
                     width={positionModal.width}
                     left={positionModal.left}
                     top={positionModal.top}
-                    onMouseLeave={() => {
-                        setShowModal(false);
-                    }}
+                    onMouseLeave={() => {}}
                 >
                     <Poster
                         src="https://occ-0-2772-3933.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABSEz2ZNn_8fcHrdCnW_dq2YzK-bfvWjPlwAvI_LjWIhTxGMj050uGMUUSTQTzjdEgd5JqobRFKeXeI2ju0m452goEGVgUiszovYGvWPAMUSffXWm1SGrmvk23qvJ.jpg?r=e80"

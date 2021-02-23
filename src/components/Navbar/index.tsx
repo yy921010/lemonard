@@ -46,10 +46,6 @@ const NavBar: React.FC = () => {
         console.log('ssss');
     };
 
-    const targetPages = (url: string) => {
-        console.log('targetPages', url);
-        setShowMenu(false);
-    };
     return (
         <Nav
             style={{

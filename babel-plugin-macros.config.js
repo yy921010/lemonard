@@ -1,7 +1,7 @@
 module.exports = {
   twin: {
     preset: 'styled-components',
-    debug:true,
+    debug: false,
     styled: {
       import: 'default',
       from: 'styled-components',
