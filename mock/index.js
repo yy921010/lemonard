@@ -97,42 +97,81 @@ module.exports = {
     },
     [`GET /menu/:id`](req, res) {
         const mockData = mockjs.mock({
-            'data|1-20': [
+            theme: {
+                colors: [],
+                images: [],
+                metaInformation: {
+                    description: '@cparagraph',
+                    keywords: '@title',
+                    title: '@csentence',
+                },
+            },
+            id: '@guid',
+            'contents|1-10': [
                 {
-                    theme: {
-                        colors: [],
-                        images: [],
-                        metaInformation: {
-                            description: '当前页面描述',
-                            keywords: '关键 seo',
-                            title: '页面title',
-                        },
-                    },
+                    //slickStructureGrid 滑动组件
+                    // UnstructuredGrid 大海报
+                    // 排行榜
+                    //structuredGridList 列表
+                    'type|1': ['StructureGrid', 'UnstructuredGrid', 'structuredGridList'],
                     id: '@guid',
-                    contents: [
+                    laneTitle: '@title',
+                    coloredTitles: [
                         {
-                            //slickStructureGrid 滑动组件
-                            // UnstructuredGrid 大海报
-                            // 排行榜
-                            'type|1': ['slickStructureGrid', 'UnstructuredGrid'],
+                            title: '',
+                            color: '',
+                        },
+                    ],
+                    backgroundImage: '',
+                    // action:动作  // link 跳转到其余页面
+                    laneContentLink: {},
+                    //单个影片
+                    'teasers|1-30': [
+                        {
                             id: '@guid',
-                            laneTitle: '@title',
-                            coloredTitles: [
+                            title: '@ctitle',
+                            subtitle: '@ctitle',
+                            time: mockjs.Random.time('yyyy'),
+                            rate: '9.3',
+                            description: '@cparagraph(1,3)',
+                            'images|1-3': [
                                 {
-                                    title: '',
-                                    color: '',
+                                    'type|1': [1, 2, 3, 4, 5],
+                                    href: mockjs.Random.image('160x90', mockjs.Random.color()),
                                 },
                             ],
-                            backgroundImage: '',
-                            // action:动作  // link 跳转到其余页面
-                            laneContentLink: {},
-                            //单个影片
-                            teasers: [],
+                            'language|1': ['英语', '法语', '中文'],
+                            'tags|1-4': [
+                                {
+                                    tagName: '@cname',
+                                    'tagType|1': ['1', '2', '3'],
+                                    'tagItems|1-10': [
+                                        {
+                                            name: '@cname',
+                                            id: '@guid',
+                                        },
+                                    ],
+                                },
+                            ],
+                            'seasons|1-10': [
+                                {
+                                    id: '@guid',
+                                    seasonName: '@ctitle',
+                                    'episodeList|1-40': [
+                                        {
+                                            'playDuration|1-400': 1,
+                                            'episodeNumber|1-100': 1,
+                                            description: '@cparagraph(1,3)',
+                                            poster: mockjs.Random.image('160x90'),
+                                        },
+                                    ],
+                                },
+                            ],
                         },
                     ],
                 },
             ],
         });
-        res.json(mockData.data);
+        res.json(mockData);
     },
 };
