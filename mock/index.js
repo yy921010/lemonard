@@ -116,10 +116,10 @@ module.exports = {
                     'type|1': ['StructureGrid', 'UnstructuredGrid', 'structuredGridList'],
                     id: '@guid',
                     laneTitle: '@title',
-                    coloredTitles: [
+                    'coloredTitles|1-3': [
                         {
-                            title: '',
-                            color: '',
+                            title: '@title',
+                            color: '@color',
                         },
                     ],
                     backgroundImage: '',

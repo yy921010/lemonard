@@ -10,7 +10,7 @@ export interface SlickItem {
 
 export interface SlickProps {
     id: string;
-    title: string;
+    title: string | React.ReactElement;
     children?: React.ReactNode;
     onMore: (id: string) => void;
 }
@@ -21,7 +21,7 @@ const SlickTitle = tw.h1`text-base md:text-2xl `;
 
 const SlickAll = tw.div`text-sm md:text-base flex items-center`;
 
-const SlickListWrap = tw.div`md:px-8 box-border overflow-hidden my-4`;
+const SlickListWrap = tw.div`md:px-8 box-border overflow-hidden my-20`;
 
 function SlickList({ title, id, onMore, children }: SlickProps): JSX.Element {
     const settings = {

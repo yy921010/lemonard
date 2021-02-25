@@ -31,7 +31,7 @@ const Poster: React.FC<PosterProp> = ({ className, aspectRatio = 1 / 1, onClick,
                 name="film"
                 tw="text-2xl md:text-3xl lg:text-4xl text-white text-opacity-25 absolute left-1/2 top-1/2  transform(-translate-x-1/2 -translate-y-1/2)"
             />
-            <img src={src} alt={src} tw="z-10 top-0 w-full h-full left-0 absolute" />
+            <img src={src} alt={src} tw="z-10 top-0 w-full left-0 absolute" />
             {children}
         </PosterWrap>
     );
