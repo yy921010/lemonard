@@ -21,7 +21,7 @@ const SlickTitle = tw.h1`text-base md:text-2xl `;
 
 const SlickAll = tw.div`text-sm md:text-base flex items-center`;
 
-const SlickListWrap = tw.div`md:px-8 box-border overflow-hidden my-20`;
+const SlickListWrap = tw.div`md:px-8 lg:px-10 xl:px-14 box-border overflow-hidden my-20`;
 
 function SlickList({ title, id, onMore, children }: SlickProps): JSX.Element {
     const settings = {

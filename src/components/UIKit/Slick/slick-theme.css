@@ -4,7 +4,7 @@
     line-height: 0;
     position: absolute;
     display: block;
-    width: 35px;
+    width: 54px;
     padding: 0;
     -webkit-transform: translate(0, -50%);
     -ms-transform: translate(0, -50%);
@@ -73,19 +73,19 @@
 }
 
 .slick-prev {
-    left: -35px;
+    left: -54px;
 }
 [dir='rtl'] .slick-prev {
-    right: -35px;
+    right: -54px;
     left: auto;
 }
 
 .slick-next {
-    right: -35px;
+    right: -54px;
 }
 [dir='rtl'] .slick-next {
     right: auto;
-    left: -35px;
+    left: -54px;
 }
 
 /* Dots */

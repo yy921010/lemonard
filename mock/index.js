@@ -122,7 +122,10 @@ module.exports = {
                             color: '@color',
                         },
                     ],
-                    backgroundImage: '',
+                    backgroundImage: {
+                      type:2,
+                      href:mockjs.Random.image('1600x900', mockjs.Random.color())
+                    },
                     // action:动作  // link 跳转到其余页面
                     laneContentLink: {},
                     //单个影片

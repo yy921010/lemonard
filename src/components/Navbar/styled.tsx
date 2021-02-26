@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 export const Nav = styled.nav(() => [tw`fixed top-0 left-0 w-full z-20 h-20`]);
 
-export const NavContainer = tw.div`flex items-center justify-between px-4 h-full mx-auto container text-gray-100`;
+export const NavContainer = tw.div`flex items-center justify-between h-full mx-auto text-gray-100 px-4 md:px-8 lg:px-10 xl:px-14`;
 
 export const NavSideBar = tw.div`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-30 flex`;
 

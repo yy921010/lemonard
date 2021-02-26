@@ -3,8 +3,10 @@ import { useParams } from 'react-router-dom';
 import { useRequest } from 'ahooks';
 import { Helmet } from 'react-helmet';
 import { Poster, SlickList } from '@/components/UIKit';
-import { BillboardHero, HeroVignette, NavigatorContainer, PosterWall, SlickSkeleton, SlickTitle } from './styled';
 import 'twin.macro';
+import Billboard from '@/components/Navigator/Billboard';
+import { NavigatorContainer, PosterWall, SlickSkeleton, SlickTitle } from './styled';
+
 import { Content, Navigator } from './types';
 
 const UnstructuredGridTitle: React.FC<Content> = ({ laneTitle, coloredTitles }) => {
@@ -24,7 +26,6 @@ const UnstructuredGridTitle: React.FC<Content> = ({ laneTitle, coloredTitles }) 
     return <>{laneTitle}</>;
 };
 
-// TODO: 构建大海报、slick 组件 抽取，排行榜,list 组件的分页功能
 function NavigatorDetail(): JSX.Element {
     const { id } = useParams<{ id: string }>();
     const { data } = useRequest<Navigator>(`/menu/${id}`, {
@@ -84,17 +85,16 @@ function NavigatorDetail(): JSX.Element {
                             }
                             if (item.type === 'UnstructuredGrid') {
                                 return (
-                                    <BillboardHero>
-                                        <Poster
-                                            src="https://occ-0-2772-3933.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABSEz2ZNn_8fcHrdCnW_dq2YzK-bfvWjPlwAvI_LjWIhTxGMj050uGMUUSTQTzjdEgd5JqobRFKeXeI2ju0m452goEGVgUiszovYGvWPAMUSffXWm1SGrmvk23qvJ.jpg?r=e80"
-                                            aspectRatio={16 / 9}
-                                        />
-                                        <HeroVignette />
-                                    </BillboardHero>
+                                    <Billboard
+                                        key={item.id}
+                                        title={item.teasers[0].title}
+                                        description={item.teasers[0].description}
+                                        backgroundImage={item.backgroundImage.href}
+                                    />
                                 );
                             }
                             return (
-                                <PosterWall>
+                                <PosterWall key={item.id}>
                                     {item.teasers.map((teaser) => {
                                         return (
                                             <div key={teaser.title} tw="cursor-pointer">

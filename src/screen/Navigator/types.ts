@@ -24,12 +24,13 @@ export interface Teaser extends VodInfo {
     id: string;
     images: Image[];
 }
+
 export interface Content {
     type: 'StructureGrid' | 'UnstructuredGrid' | 'StructuredGridList';
     id: string;
     laneTitle: string;
     coloredTitles: ColoredTitle[];
-    backgroundImage: string;
+    backgroundImage: Image;
     laneContentLink: string;
     teasers: Teaser[];
 }
