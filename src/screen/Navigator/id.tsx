@@ -47,6 +47,7 @@ const ModalContainer = styled(motion.div)(({ width, top, left }: { width: number
 // TODO: 海报预览
 // TODO: 抽取组件
 // TODO: 详情页面链接
+// 3.7 号发布1.0 版本
 
 function NavigatorDetail(): JSX.Element {
     const { id } = useParams<{ id: string }>();
