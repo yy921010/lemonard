@@ -4,7 +4,7 @@ import { useRequest } from 'ahooks';
 import { Helmet } from 'react-helmet';
 import { Poster, SlickList } from '@/components/UIKit';
 import tw, { styled, css } from 'twin.macro';
-import Billboard from '@/components/Navigator/Billboard';
+import { Billboard } from '@/components';
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import { NavigatorContainer, PosterWall, SlickSkeleton, SlickTitle } from './styled';
 
@@ -42,6 +42,11 @@ const ModalContainer = styled(motion.div)(({ width, top, left }: { width: number
         left: ${left}px;
     `,
 ]);
+
+// TODO: 组件数据链接
+// TODO: 海报预览
+// TODO: 抽取组件
+// TODO: 详情页面链接
 
 function NavigatorDetail(): JSX.Element {
     const { id } = useParams<{ id: string }>();
