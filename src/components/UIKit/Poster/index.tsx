@@ -1,5 +1,6 @@
 import tw, { styled, css } from 'twin.macro';
 import React from 'react';
+import { motion } from 'framer-motion';
 import Icon from '../RemixIcon';
 
 export interface PosterProp {
@@ -9,7 +10,7 @@ export interface PosterProp {
     onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
-const PosterWrap = styled.div(({ aspectRatio = 1 / 1 }: PosterProp) => {
+const PosterWrap = styled(motion.div)(({ aspectRatio = 1 / 1 }: PosterProp) => {
     return [
         tw`bg-no-repeat bg-center flex-shrink-0 bg-cover relative bg-black rounded overflow-hidden`,
         css`
