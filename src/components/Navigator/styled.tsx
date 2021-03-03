@@ -35,3 +35,15 @@ export const VignetteLayer = styled.div(() => [
         background: linear-gradient(77deg, rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0) 85%);
     `,
 ]);
+
+export const NavigatorContainer = tw.div``;
+
+export const NavigatorContainer1 = tw.div``;
+
+export const SlickSkeleton = tw.div``;
+
+export const SlickTitle = styled.span(({ color }) => [
+    css`
+        color: ${color};
+    `,
+]);

@@ -1,12 +1,13 @@
 import React from 'react';
 import 'twin.macro';
 import { motion } from 'framer-motion';
-import { Teaser } from '@/screen/Navigator/types';
+import { Vod } from '@/interfaces/Vod';
+import { getImageUrl } from '@/utils';
 import { Poster } from '../UIKit';
 
 export interface PosterWallProps {
-    teasers: Teaser[];
-    onHoverStartHandle: (event: React.MouseEvent, teaserId: string) => void;
+    teasers: Vod[];
+    onHoverStartHandle: (event: React.MouseEvent, teaser: Vod) => void;
     onHoverEndHandle: () => void;
 }
 
@@ -20,7 +21,7 @@ const PosterWall: React.FC<PosterWallProps> = ({ teasers, onHoverStartHandle, on
                         tw="cursor-pointer"
                         layoutId={teaser.id}
                         onMouseEnter={(event) => {
-                            onHoverStartHandle(event, teaser.id);
+                            onHoverStartHandle(event, teaser);
                         }}
                         onMouseLeave={() => {
                             onHoverEndHandle();
@@ -28,7 +29,7 @@ const PosterWall: React.FC<PosterWallProps> = ({ teasers, onHoverStartHandle, on
                     >
                         <motion.div>
                             <Poster
-                                src={teaser.images[0].href}
+                                src={getImageUrl(teaser.images, 10)}
                                 aspectRatio={16 / 9}
                                 tw="mx-0.5 sm:mx-1 md:mx-1.5 mb-2"
                             />

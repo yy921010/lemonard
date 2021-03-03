@@ -1,14 +1,15 @@
 import React from 'react';
 import tw, { styled, css } from 'twin.macro';
 import { motion } from 'framer-motion';
-import { Content, Teaser } from '@/screen/Navigator/types';
+import { Content, Vod } from '@/interfaces';
+import getImageUrl from '@/utils';
 import { Poster, SlickList } from '../UIKit';
 
 export interface StructureGridProps {
-    teasers: Teaser[];
+    teasers: Vod[];
     content: Content;
     onMoreHandle?: () => void;
-    onHoverStartHandle: (event: React.MouseEvent, teaserId: string) => void;
+    onHoverStartHandle: (event: React.MouseEvent, teaser: Vod) => void;
     onHoverEndHandle: () => void;
 }
 
@@ -60,7 +61,7 @@ const StructureGrid: React.FC<StructureGridProps> = ({
                         <div key={teaser.id} tw="cursor-pointer">
                             <motion.div
                                 onMouseEnter={(event) => {
-                                    onHoverStartHandle(event, teaser.id);
+                                    onHoverStartHandle(event, teaser);
                                 }}
                                 onMouseLeave={() => {
                                     onHoverEndHandle();
@@ -68,7 +69,7 @@ const StructureGrid: React.FC<StructureGridProps> = ({
                                 layoutId={teaser.id}
                             >
                                 <Poster
-                                    src={teaser.images[0].href}
+                                    src={getImageUrl(teaser.images, 10)}
                                     aspectRatio={16 / 9}
                                     tw="mx-0.5 sm:mx-1 md:mx-1.5 mb-2"
                                 />

@@ -7,12 +7,6 @@ export type Image = {
     type: number;
 };
 
-export interface Tag {
-    id?: string;
-    name: string;
-    type?: string;
-}
-
 export interface Season {
     id: string;
     name: string;
@@ -48,15 +42,14 @@ export interface Actor {
 }
 
 export interface Vod {
-    id?: string;
+    id: string;
     title: string;
     subTitle?: string;
     rate?: string;
     language?: string;
     time?: string;
     description?: string;
-    images?: Image[];
-    tags: Tag[];
+    images: Image[];
     seasons?: Season[];
     trailerUrl?: string;
     playUrl?: string;

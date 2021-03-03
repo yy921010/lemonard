@@ -1,4 +1,4 @@
-import { VodInfo } from '@/components';
+import { Vod, Image } from './Vod';
 
 export interface MetaInformation {
     description: string;
@@ -6,8 +6,10 @@ export interface MetaInformation {
     title: string;
 }
 export interface Theme {
-    colors: string[];
-    images?: string[];
+    colors?: string[];
+    images?: Image[];
+    title?: string;
+    coloredTitles?: ColoredTitle[];
     metaInformation: MetaInformation;
 }
 
@@ -16,23 +18,19 @@ export interface ColoredTitle {
     color: string;
 }
 
-export interface Image {
-    type: number;
-    href: string;
-}
-export interface Teaser extends VodInfo {
-    id: string;
-    images: Image[];
+export enum ContentType {
+    StructureGrid = 'StructureGrid',
+    SlickGrid = 'SlickGrid',
+    Carousel = 'Carousel',
 }
 
 export interface Content {
-    type: 'StructureGrid' | 'UnstructuredGrid' | 'StructuredGridList';
+    type: ContentType;
     id: string;
     laneTitle: string;
     coloredTitles: ColoredTitle[];
-    backgroundImage: Image;
     laneContentLink: string;
-    teasers: Teaser[];
+    teasers: Vod[];
 }
 
 export interface Navigator {

@@ -6,6 +6,7 @@ export { default as Billboard } from './Navigator/Billboard';
 export { default as MiniModal } from './Navigator/MiniModal';
 export { default as PosterWall } from './Navigator/PosterWall';
 export { default as StructureGrid } from './Navigator/StructureGrid';
+export { default as Navigator } from './Navigator';
 
 export * from './Detail';
 export * from './Navigator/MiniModal';

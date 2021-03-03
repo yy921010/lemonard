@@ -1,4 +1,5 @@
-import { Home, VodId, Guide, NotFound, Live, Vod, NavigatorId } from '@/screen/Root';
+import { Home, VodId, Guide, NotFound, Live, Vod } from '@/screen/Root';
+import { Navigator } from '@/components';
 
 const isShown = true;
 
@@ -34,8 +35,8 @@ const routes = [
         path: '/guide',
     },
     {
-        name: 'navigatorId',
-        component: NavigatorId,
+        name: 'Navigator',
+        component: Navigator,
         path: '/navigator/:id',
     },
     {

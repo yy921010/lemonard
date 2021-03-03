@@ -1,11 +1,13 @@
 import React from 'react';
 import tw, { styled, css } from 'twin.macro';
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
-import { VodInfo } from '../Detail';
+import { Vod } from '@/interfaces';
+import getImageUrl from '@/utils';
+import { Poster } from '../UIKit';
 
 export interface MiniModalProps extends MiniModalCss {
     layoutId: string;
-    vodInfo?: VodInfo;
+    vod?: Vod;
     onMouseLeaveHandle?: () => void;
 }
 
@@ -17,7 +19,7 @@ export interface MiniModalCss {
 }
 
 export const MiniModalContainer = styled(motion.div)(({ width, top, left, height }: MiniModalCss) => [
-    tw`absolute border overflow-hidden z-10 opacity-100 shadow-2xl box-border`,
+    tw`absolute overflow-hidden z-10 opacity-100 shadow-2xl box-border`,
     css`
         width: ${width}px;
         top: ${top}px;
@@ -34,7 +36,7 @@ const MiniModal: React.FC<MiniModalProps> = ({
     height,
     onMouseLeaveHandle,
     children,
-    vodInfo,
+    vod,
 }) => {
     return (
         <AnimateSharedLayout type="crossfade">
@@ -53,7 +55,16 @@ const MiniModal: React.FC<MiniModalProps> = ({
                             }
                         }}
                     >
-                        {vodInfo?.title}
+                        {vod ? (
+                            <Poster src={getImageUrl(vod.images, 12)} aspectRatio={16 / 9}>
+                                <div tw="absolute top-0 left-0 right-0 bottom-0 p-2 box-border">
+                                    <div tw="text-base absolute top-5">{vod.title}</div>
+                                    <div tw="text-sm">{vod.time}</div>
+                                </div>
+                            </Poster>
+                        ) : (
+                            ''
+                        )}
                     </MiniModalContainer>
                 )}
             </AnimatePresence>

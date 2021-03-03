@@ -3,16 +3,17 @@ import { useParams } from 'react-router-dom';
 import { useRequest } from 'ahooks';
 import { Helmet } from 'react-helmet';
 import { Billboard, MiniModal, MiniModalProps, PosterWall, StructureGrid } from '@/components';
+import { ContentType, Navigator } from '@/interfaces/Navigator';
+import getImageUrl from '@/utils';
+import { Vod } from '@/interfaces';
 import { NavigatorContainer } from './styled';
-
-import { Navigator } from './types';
 
 let timeId: NodeJS.Timeout;
 
 // TODO: 组件数据链接
 // TODO: 海报预览
 // TODO: 详情页面链接
-// 3.7 号发布1.0 版本
+// 3.7 号发布 0.1 版本
 
 function NavigatorDetail(): JSX.Element {
     const { id } = useParams<{ id: string }>();
@@ -30,7 +31,7 @@ function NavigatorDetail(): JSX.Element {
         height: 0,
     });
 
-    const showMiniModal = (boundingClientRect: DOMRect, layoutId: string) => {
+    const showMiniModal = (boundingClientRect: DOMRect, teaser: Vod) => {
         const browserWidth = window.outerWidth;
         if (boundingClientRect) {
             const { left, top, width } = boundingClientRect;
@@ -64,13 +65,14 @@ function NavigatorDetail(): JSX.Element {
                 width: modalWidth,
                 left: finalLeft,
                 top: top + document.documentElement.scrollTop - 40,
-                layoutId,
+                layoutId: teaser.id,
+                vod: teaser,
                 height: (modalWidth * 9) / 16,
             });
         }
     };
 
-    const onMouseEnterHandle = (event: React.MouseEvent, layoutId: string) => {
+    const onMouseEnterHandle = (event: React.MouseEvent, teaser: Vod) => {
         clearTimeout(timeId);
         const boundingClientRect = event.currentTarget.getBoundingClientRect();
         setPositionModal({
@@ -81,7 +83,7 @@ function NavigatorDetail(): JSX.Element {
             height: 0,
         });
         timeId = setTimeout(() => {
-            showMiniModal(boundingClientRect, layoutId);
+            showMiniModal(boundingClientRect, teaser);
         }, 1000);
     };
     return (
@@ -95,7 +97,7 @@ function NavigatorDetail(): JSX.Element {
                     </Helmet>
                     <NavigatorContainer>
                         {data.contents.map((item) => {
-                            if (item.type === 'StructureGrid') {
+                            if (item.type === ContentType.SlickGrid) {
                                 return (
                                     <MiniModal
                                         key={item.id}
@@ -125,13 +127,13 @@ function NavigatorDetail(): JSX.Element {
                                     </MiniModal>
                                 );
                             }
-                            if (item.type === 'UnstructuredGrid') {
+                            if (item.type === ContentType.Carousel) {
                                 return (
                                     <Billboard
                                         key={item.id}
                                         title={item.teasers[0].title}
                                         description={item.teasers[0].description}
-                                        backgroundImage={item.backgroundImage.href}
+                                        backgroundImage={getImageUrl(item.teasers[0].images, 15)}
                                     />
                                 );
                             }
@@ -141,13 +143,13 @@ function NavigatorDetail(): JSX.Element {
                                     {...positionModal}
                                     onMouseLeaveHandle={() => {
                                         clearTimeout(timeId);
-                                        setPositionModal({
-                                            left: 0,
-                                            top: 0,
-                                            width: 0,
-                                            layoutId: '',
-                                            height: 0,
-                                        });
+                                        // setPositionModal({
+                                        //     left: 0,
+                                        //     top: 0,
+                                        //     width: 0,
+                                        //     layoutId: '',
+                                        //     height: 0,
+                                        // });
                                     }}
                                 >
                                     <PosterWall
