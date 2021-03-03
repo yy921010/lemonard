@@ -3,7 +3,7 @@ import tw, { styled, css } from 'twin.macro';
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import { Vod } from '@/interfaces';
 import getImageUrl from '@/utils';
-import { Poster } from '../UIKit';
+import { Button, Icon, Poster } from '../UIKit';
 
 export interface MiniModalProps extends MiniModalCss {
     layoutId: string;
@@ -57,9 +57,22 @@ const MiniModal: React.FC<MiniModalProps> = ({
                     >
                         {vod ? (
                             <Poster src={getImageUrl(vod.images, 12)} aspectRatio={16 / 9}>
-                                <div tw="absolute top-0 left-0 right-0 bottom-0 p-2 box-border">
-                                    <div tw="text-base absolute top-5">{vod.title}</div>
-                                    <div tw="text-sm">{vod.time}</div>
+                                <div tw="absolute top-0 left-0 right-0 bottom-0 p-8 box-border">
+                                    <div tw="text-2xl absolute bottom-20">{vod.title}</div>
+                                    <div tw="text-sm absolute bottom-10">
+                                        {vod.time} | {vod.language} | {vod.time}
+                                    </div>
+                                </div>
+                                <div tw="absolute top-1 right-4 w-12 z-50 flex flex-col space-y-2 mt-4">
+                                    <Button circle>
+                                        <Icon name="play" type="fill" />
+                                    </Button>
+                                    <Button circle>
+                                        <Icon name="volume-mute" type="fill" />
+                                    </Button>
+                                    <Button circle>
+                                        <Icon name="arrow-down-s" />
+                                    </Button>
                                 </div>
                             </Poster>
                         ) : (

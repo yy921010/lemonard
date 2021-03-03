@@ -143,13 +143,13 @@ function NavigatorDetail(): JSX.Element {
                                     {...positionModal}
                                     onMouseLeaveHandle={() => {
                                         clearTimeout(timeId);
-                                        // setPositionModal({
-                                        //     left: 0,
-                                        //     top: 0,
-                                        //     width: 0,
-                                        //     layoutId: '',
-                                        //     height: 0,
-                                        // });
+                                        setPositionModal({
+                                            left: 0,
+                                            top: 0,
+                                            width: 0,
+                                            layoutId: '',
+                                            height: 0,
+                                        });
                                     }}
                                 >
                                     <PosterWall
