@@ -70,7 +70,7 @@ function NavigatorDetail(): JSX.Element {
         }
     };
 
-    const onMouseEnterHandle = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, layoutId: string) => {
+    const onMouseEnterHandle = (event: React.MouseEvent, layoutId: string) => {
         clearTimeout(timeId);
         const boundingClientRect = event.currentTarget.getBoundingClientRect();
         setPositionModal({
@@ -101,6 +101,7 @@ function NavigatorDetail(): JSX.Element {
                                         key={item.id}
                                         {...positionModal}
                                         onMouseLeaveHandle={() => {
+                                            clearTimeout(timeId);
                                             setPositionModal({
                                                 left: 0,
                                                 top: 0,
@@ -113,9 +114,10 @@ function NavigatorDetail(): JSX.Element {
                                         <StructureGrid
                                             teasers={item.teasers}
                                             content={item}
-                                            onMouseEnterHandle={(event, teaserId) => {
-                                                onMouseEnterHandle(event, teaserId);
+                                            onHoverEndHandle={() => {
+                                                clearTimeout(timeId);
                                             }}
+                                            onHoverStartHandle={onMouseEnterHandle}
                                             onMoreHandle={() => {
                                                 handleMore(item.laneContentLink);
                                             }}
@@ -138,6 +140,7 @@ function NavigatorDetail(): JSX.Element {
                                     key={item.id}
                                     {...positionModal}
                                     onMouseLeaveHandle={() => {
+                                        clearTimeout(timeId);
                                         setPositionModal({
                                             left: 0,
                                             top: 0,
@@ -149,9 +152,10 @@ function NavigatorDetail(): JSX.Element {
                                 >
                                     <PosterWall
                                         teasers={item.teasers}
-                                        onMouseEnterHandle={(event, teaserId) => {
-                                            onMouseEnterHandle(event, teaserId);
+                                        onHoverEndHandle={() => {
+                                            clearTimeout(timeId);
                                         }}
+                                        onHoverStartHandle={onMouseEnterHandle}
                                     />
                                 </MiniModal>
                             );

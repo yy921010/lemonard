@@ -6,10 +6,11 @@ import { Poster } from '../UIKit';
 
 export interface PosterWallProps {
     teasers: Teaser[];
-    onMouseEnterHandle?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, teaserId: string) => void;
+    onHoverStartHandle: (event: React.MouseEvent, teaserId: string) => void;
+    onHoverEndHandle: () => void;
 }
 
-const PosterWall: React.FC<PosterWallProps> = ({ teasers, onMouseEnterHandle }) => {
+const PosterWall: React.FC<PosterWallProps> = ({ teasers, onHoverStartHandle, onHoverEndHandle }) => {
     return (
         <div tw="grid grid-cols-3 gap-y-8 md:(px-6 grid-cols-4) lg:(grid-cols-5 px-10) xl:(grid-cols-6 px-14)">
             {teasers.map((teaser) => {
@@ -19,9 +20,10 @@ const PosterWall: React.FC<PosterWallProps> = ({ teasers, onMouseEnterHandle }) 
                         tw="cursor-pointer"
                         layoutId={teaser.id}
                         onMouseEnter={(event) => {
-                            if (onMouseEnterHandle) {
-                                onMouseEnterHandle(event, teaser.id);
-                            }
+                            onHoverStartHandle(event, teaser.id);
+                        }}
+                        onMouseLeave={() => {
+                            onHoverEndHandle();
                         }}
                     >
                         <motion.div>

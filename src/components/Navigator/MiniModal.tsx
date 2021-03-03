@@ -1,9 +1,11 @@
 import React from 'react';
 import tw, { styled, css } from 'twin.macro';
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
+import { VodInfo } from '../Detail';
 
 export interface MiniModalProps extends MiniModalCss {
     layoutId: string;
+    vodInfo?: VodInfo;
     onMouseLeaveHandle?: () => void;
 }
 
@@ -24,7 +26,16 @@ export const MiniModalContainer = styled(motion.div)(({ width, top, left, height
     `,
 ]);
 
-const MiniModal: React.FC<MiniModalProps> = ({ layoutId, width, left, top, height, onMouseLeaveHandle, children }) => {
+const MiniModal: React.FC<MiniModalProps> = ({
+    layoutId,
+    width,
+    left,
+    top,
+    height,
+    onMouseLeaveHandle,
+    children,
+    vodInfo,
+}) => {
     return (
         <AnimateSharedLayout type="crossfade">
             {children}
@@ -42,7 +53,7 @@ const MiniModal: React.FC<MiniModalProps> = ({ layoutId, width, left, top, heigh
                             }
                         }}
                     >
-                        MinidModal
+                        {vodInfo?.title}
                     </MiniModalContainer>
                 )}
             </AnimatePresence>

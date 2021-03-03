@@ -31,6 +31,7 @@ interface Tag {
 }
 
 export interface VodInfo {
+    id?: string;
     poster?: string;
     title: string;
     subTitle?: string;

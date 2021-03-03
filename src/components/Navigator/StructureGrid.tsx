@@ -8,7 +8,8 @@ export interface StructureGridProps {
     teasers: Teaser[];
     content: Content;
     onMoreHandle?: () => void;
-    onMouseEnterHandle?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, teaserId: string) => void;
+    onHoverStartHandle: (event: React.MouseEvent, teaserId: string) => void;
+    onHoverEndHandle: () => void;
 }
 
 export const SlickSkeleton = tw.div``;
@@ -36,7 +37,13 @@ const UnstructuredGridTitle: React.FC<Content> = ({ laneTitle, coloredTitles }) 
     return <>{laneTitle}</>;
 };
 
-const StructureGrid: React.FC<StructureGridProps> = ({ teasers, content, onMoreHandle, onMouseEnterHandle }) => {
+const StructureGrid: React.FC<StructureGridProps> = ({
+    teasers,
+    content,
+    onMoreHandle,
+    onHoverEndHandle,
+    onHoverStartHandle,
+}) => {
     return (
         <SlickList
             id={content.id}
@@ -52,12 +59,13 @@ const StructureGrid: React.FC<StructureGridProps> = ({ teasers, content, onMoreH
                     return (
                         <div key={teaser.id} tw="cursor-pointer">
                             <motion.div
-                                layoutId={teaser.id}
                                 onMouseEnter={(event) => {
-                                    if (onMouseEnterHandle) {
-                                        onMouseEnterHandle(event, teaser.id);
-                                    }
+                                    onHoverStartHandle(event, teaser.id);
                                 }}
+                                onMouseLeave={() => {
+                                    onHoverEndHandle();
+                                }}
+                                layoutId={teaser.id}
                             >
                                 <Poster
                                     src={teaser.images[0].href}
