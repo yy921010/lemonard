@@ -85,8 +85,8 @@
     "mockjs": "^1.1.0",
     "node-sass": "^4.14.1",
     "prettier": "^2.0.5",
-    "progress-bar-webpack-plugin": "^2.1.0",
-    "umi-mock-middleware": "^1.0.0"
+    "umi-mock-middleware": "^1.0.0",
+    "webpackbar": "^5.0.0-3"
   },
   "husky": {
     "hooks": {

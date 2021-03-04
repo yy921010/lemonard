@@ -107,7 +107,7 @@ module.exports = {
                 },
             },
             id: '@guid',
-            'contents|1-10': [
+            'contents': [
                 {
                     //slickStructureGrid 滑动组件
                     // UnstructuredGrid 大海报
@@ -123,8 +123,8 @@ module.exports = {
                         },
                     ],
                     backgroundImage: {
-                      type:2,
-                      href:mockjs.Random.image('1600x900', mockjs.Random.color())
+                        type: 2,
+                        href: mockjs.Random.image('1600x900', mockjs.Random.color()),
                     },
                     // action:动作  // link 跳转到其余页面
                     laneContentLink: {},
@@ -137,12 +137,21 @@ module.exports = {
                             time: mockjs.Random.time('yyyy'),
                             rate: '9.3',
                             description: '@cparagraph(1,3)',
-                            'images|1-3': [
+                            images: [
                                 {
-                                    'type|1': [1, 2, 3, 4, 5],
+                                    type: 10,
                                     href: mockjs.Random.image('160x90', mockjs.Random.color()),
                                 },
+                                {
+                                    type: 15,
+                                    href: mockjs.Random.image('1600x900', mockjs.Random.color()),
+                                },
+                                {
+                                    type: 12,
+                                    href: mockjs.Random.image('320x180', mockjs.Random.color()),
+                                },
                             ],
+                            trailerUrl:'https://imdb-video.media-imdb.com/vi3485450265/1434659607842-pgv4ql-1614818229304.mp4?Expires=1614958659&Signature=VSfYyDcOH1ZCTrwjVjtL773Jufd2jwdqnASymTwc5ZdEXGoV3shvDfsmMdLMwlL7Az1jINEJs~cpGEkG1agr--9YhnOMK~ysIPkedLeh3ZmgHM3x2GsGsy3~ZfxZsWLdLHVmEuQlir8sQgoJzejaeE0EDH3GX9H~65E71cFjNmAVP69NzJATOQUn0Z64K~fWcqd21cHYwl5FE0dASnRJcRHa6cx2k0bZypJNITLRZJCFNDtjYjN8240TVDYa5AKyDgesIOmiqE8f0HrMaOopm6DtiwSahikUDkYs7xa7rq2qdgG6qRIzSNgZ7jt6qW~6CFTjxOD54Bd77PLEsjbhhw__&Key-Pair-Id=APKAIFLZBVQZ24NQH3KA',
                             'language|1': ['英语', '法语', '中文'],
                             'tags|1-4': [
                                 {

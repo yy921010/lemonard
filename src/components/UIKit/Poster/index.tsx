@@ -8,6 +8,7 @@ export interface PosterProp {
     aspectRatio: number;
     src?: string;
     onClick?: React.MouseEventHandler<HTMLElement>;
+    onMouseMove?: React.MouseEventHandler<HTMLElement>;
 }
 
 const PosterWrap = styled(motion.div)(({ aspectRatio = 1 / 1 }: PosterProp) => {
@@ -25,9 +26,9 @@ const PosterWrap = styled(motion.div)(({ aspectRatio = 1 / 1 }: PosterProp) => {
     ];
 });
 
-const Poster: React.FC<PosterProp> = ({ className, aspectRatio = 1 / 1, onClick, src = '', children }) => {
+const Poster: React.FC<PosterProp> = ({ className, aspectRatio = 1 / 1, onClick, src = '', children, onMouseMove }) => {
     return (
-        <PosterWrap className={className} aspectRatio={aspectRatio} onClick={onClick}>
+        <PosterWrap className={className} aspectRatio={aspectRatio} onClick={onClick} onMouseMove={onMouseMove}>
             <Icon
                 name="film"
                 tw="text-2xl md:text-3xl lg:text-4xl text-white text-opacity-25 absolute left-1/2 top-1/2  transform(-translate-x-1/2 -translate-y-1/2)"

@@ -18,7 +18,7 @@ const Button = styled(motion.button)(({ primary, info, link, circle, size, disab
     primary ? tw`bg-red-500 text-gray-100 border-red-500 hover:(bg-red-400 text-gray-200 border-red-400)` : '',
     info ? tw`bg-blue-500 text-gray-100 border-blue-500 hover:(bg-blue-400 text-gray-200 border-blue-400)` : '',
     link ? tw`bg-transparent text-gray-100 border-none` : '',
-    circle ? tw`rounded-full w-8 h-8 p-0 md:(h-11 w-11)` : '',
+    circle ? tw`rounded-full w-8 h-8 p-0 md:(h-11 w-11) bg-white bg-opacity-10` : '',
     disable ? tw`text-gray-600 cursor-not-allowed border-none bg-gray-800 hover:(bg-gray-800)` : '',
     size === 'large'
         ? [
