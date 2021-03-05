@@ -2,6 +2,8 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Button, Icon, Select, Poster } from '@/components/UIKit';
 import 'twin.macro';
 
+import { Episode, Season } from '@/interfaces';
+import getImageUrl from '@/utils';
 import {
     EpisodeMainTitle,
     EpisodeDescription,
@@ -13,22 +15,6 @@ import {
     EpisodeListWrap,
     EpisodeNextButton,
 } from './styled';
-
-export interface EpisodeItem {
-    id?: string;
-    episodeNumber: number;
-    title?: string;
-    description?: string;
-    poster?: string;
-    playUrl?: string;
-    playDuration?: number;
-}
-
-export interface Season {
-    id: string;
-    seasonName: string;
-    episodeList: EpisodeItem[];
-}
 
 export interface EpisodesProps {
     seasons: Season[];
@@ -68,8 +54,8 @@ const EpisodePaginationContainer: React.FC<EpisodePagination> = ({ seasonSize, o
     );
 };
 
-const Episodes: React.FC<EpisodesProps> = ({ seasons }) => {
-    const [episodes, setEpisodes] = useState<EpisodeItem[]>([]);
+const Episodes: React.FC<Season[]> = (seasons) => {
+    const [episodes, setEpisodes] = useState<Episode[]>([]);
 
     const [isShowUp, setShowUp] = useState<boolean>(false);
 
@@ -81,7 +67,7 @@ const Episodes: React.FC<EpisodesProps> = ({ seasons }) => {
     }, [episodes, isShowUp]);
 
     useEffect(() => {
-        setEpisodes(seasons[0].episodeList);
+        setEpisodes(seasons[0].episodes);
     }, [seasons]);
 
     const onEpisodePagination = (isUp: boolean) => {
@@ -91,7 +77,7 @@ const Episodes: React.FC<EpisodesProps> = ({ seasons }) => {
     const onSelect = (seasonId: unknown) => {
         const chosenSeason = seasons.find((season) => season.id === seasonId);
         if (chosenSeason) {
-            setEpisodes(chosenSeason.episodeList);
+            setEpisodes(chosenSeason.episodes);
         }
     };
     return (
@@ -109,7 +95,7 @@ const Episodes: React.FC<EpisodesProps> = ({ seasons }) => {
                     >
                         {seasons.map((item) => (
                             <Select.Option value={item.id} key={item.id}>
-                                {item.seasonName}
+                                {item.name}
                             </Select.Option>
                         ))}
                     </Select>
@@ -123,7 +109,11 @@ const Episodes: React.FC<EpisodesProps> = ({ seasons }) => {
                           return (
                               <EpisodeItem key={item.episodeNumber}>
                                   <EpisodeNumber>{item.episodeNumber}</EpisodeNumber>
-                                  <Poster src={item.poster} aspectRatio={16 / 9} tw="w-20 mr-3 md:w-32 lg:w-40" />
+                                  <Poster
+                                      src={getImageUrl(item.images, 10)}
+                                      aspectRatio={16 / 9}
+                                      tw="w-20 mr-3 md:w-32 lg:w-40"
+                                  />
                                   <EpisodeInfo>
                                       <EpisodeTitle>
                                           <h2>{item.title}</h2>

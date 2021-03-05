@@ -9,16 +9,53 @@ module.exports = {
             time: mockjs.Random.time('yyyy'),
             rate: '9.3',
             description: '@cparagraph(1,3)',
-            poster: mockjs.Random.image('160x90'),
-            'language|1': ['英语', '法语', '中文'],
-            'tags|1-4': [
+            images: [
                 {
-                    tagName: '@cname',
-                    'tagType|1': ['1', '2', '3'],
-                    'tagItems|1-10': [
+                    type: 10,
+                    href: mockjs.Random.image('160x90', mockjs.Random.color()),
+                },
+                {
+                    type: 15,
+                    href: mockjs.Random.image('1600x900', mockjs.Random.color()),
+                },
+                {
+                    type: 12,
+                    href: mockjs.Random.image('320x180', mockjs.Random.color()),
+                },
+                {
+                    type: 14,
+                    href: mockjs.Random.image('640x320', mockjs.Random.color()),
+                },
+            ],
+            trailerUrl:
+            'https://imdb-video.media-imdb.com/vi3333537817/1434659607842-pgv4ql-1614085345509.mp4?Expires=1615047200&Signature=kGrTiJhJKzroLQ8RPhi4RZMVwBZVkh4FTMMeF2mo8fGHIXq5n2MHHadpjm1gDJg7~vMpv9rjiz1MY9TD9J9MHygN5ITS8dh73N9Wz-G~paqQYRvt4cKQqXgOID23fcT1DwM7jGVKSip585vpP3DK7-3hEo8wEsU6A44FdBSZf7DKd5v-v6BUU1K0Vj4XuFKjj2zVx09HmH87TNL15sFRLsB3Wwm4XtdwPTR4u013fQisUDqVHttlzZo8xjIUxwBU~x8taRHKfmlJ6ZzmU7DnqNEjdA96AV~Rj372Fl2bFxdSGagoxcR-vwwAYTy2x9idmcPKVVblZfGSaoiOJ~fztg__&Key-Pair-Id=APKAIFLZBVQZ24NQH3KA',
+            'language|1': ['英语', '法语', '中文'],
+            'genres|1-10': [
+                {
+                    id: '@guid',
+                    name: '@title',
+                },
+            ],
+            'actors|1-10': [
+                {
+                    id: '@guid',
+                    name: '@title',
+                    images: [
                         {
-                            name: '@cname',
-                            id: '@guid',
+                            type: 10,
+                            href: mockjs.Random.image('160x90', mockjs.Random.color()),
+                        },
+                        {
+                            type: 15,
+                            href: mockjs.Random.image('1600x900', mockjs.Random.color()),
+                        },
+                        {
+                            type: 12,
+                            href: mockjs.Random.image('320x180', mockjs.Random.color()),
+                        },
+                        {
+                            type: 14,
+                            href: mockjs.Random.image('640x320', mockjs.Random.color()),
                         },
                     ],
                 },
@@ -26,13 +63,21 @@ module.exports = {
             'seasons|1-10': [
                 {
                     id: '@guid',
-                    seasonName: '@ctitle',
-                    'episodeList|1-40': [
+                    name: '@ctitle',
+                    'episodes|1-40': [
                         {
                             'playDuration|1-400': 1,
                             'episodeNumber|1-100': 1,
                             description: '@cparagraph(1,3)',
                             poster: mockjs.Random.image('160x90'),
+                            images: [
+                                {
+                                    type: 10,
+                                    href: mockjs.Random.image('160x90', mockjs.Random.color()),
+                                },
+                            ],
+                            playUrl: '@title',
+                            title: '@title',
                         },
                     ],
                 },
@@ -50,16 +95,53 @@ module.exports = {
                     time: mockjs.Random.time('yyyy'),
                     rate: '9.3',
                     description: '@cparagraph(1,3)',
-                    poster: mockjs.Random.image('160x90', mockjs.Random.color()),
-                    'language|1': ['英语', '法语', '中文'],
-                    'tags|1-4': [
+                    images: [
                         {
-                            tagName: '@cname',
-                            'tagType|1': ['1', '2', '3'],
-                            'tagItems|1-10': [
+                            type: 10,
+                            href: mockjs.Random.image('160x90', mockjs.Random.color()),
+                        },
+                        {
+                            type: 15,
+                            href: mockjs.Random.image('1600x900', mockjs.Random.color()),
+                        },
+                        {
+                            type: 12,
+                            href: mockjs.Random.image('320x180', mockjs.Random.color()),
+                        },
+                        {
+                            type: 14,
+                            href: mockjs.Random.image('640x320', mockjs.Random.color()),
+                        },
+                    ],
+                    trailerUrl:
+                        'https://imdb-video.media-imdb.com/vi3485450265/1434659607842-pgv4ql-1614818229304.mp4?Expires=1614958659&Signature=VSfYyDcOH1ZCTrwjVjtL773Jufd2jwdqnASymTwc5ZdEXGoV3shvDfsmMdLMwlL7Az1jINEJs~cpGEkG1agr--9YhnOMK~ysIPkedLeh3ZmgHM3x2GsGsy3~ZfxZsWLdLHVmEuQlir8sQgoJzejaeE0EDH3GX9H~65E71cFjNmAVP69NzJATOQUn0Z64K~fWcqd21cHYwl5FE0dASnRJcRHa6cx2k0bZypJNITLRZJCFNDtjYjN8240TVDYa5AKyDgesIOmiqE8f0HrMaOopm6DtiwSahikUDkYs7xa7rq2qdgG6qRIzSNgZ7jt6qW~6CFTjxOD54Bd77PLEsjbhhw__&Key-Pair-Id=APKAIFLZBVQZ24NQH3KA',
+                    'language|1': ['英语', '法语', '中文'],
+                    'genres|1-10': [
+                        {
+                            id: '@guid',
+                            name: '@title',
+                        },
+                    ],
+                    'actors|1-10': [
+                        {
+                            id: '@guid',
+                            name: '@title',
+                            images: [
                                 {
-                                    name: '@cname',
-                                    id: '@guid',
+                                    type: 10,
+                                    href: mockjs.Random.image('160x90', mockjs.Random.color()),
+                                },
+                                {
+                                    type: 15,
+                                    href: mockjs.Random.image('1600x900', mockjs.Random.color()),
+                                },
+                                {
+                                    type: 12,
+                                    href: mockjs.Random.image('320x180', mockjs.Random.color()),
+                                },
+                                {
+                                    type: 14,
+                                    href: mockjs.Random.image('640x320', mockjs.Random.color()),
                                 },
                             ],
                         },
@@ -67,13 +149,21 @@ module.exports = {
                     'seasons|1-10': [
                         {
                             id: '@guid',
-                            seasonName: '@ctitle',
-                            'episodeList|1-40': [
+                            name: '@ctitle',
+                            'episodes|1-40': [
                                 {
                                     'playDuration|1-400': 1,
                                     'episodeNumber|1-100': 1,
                                     description: '@cparagraph(1,3)',
                                     poster: mockjs.Random.image('160x90'),
+                                    images: [
+                                        {
+                                            type: 10,
+                                            href: mockjs.Random.image('160x90', mockjs.Random.color()),
+                                        },
+                                    ],
+                                    playUrl: '@title',
+                                    title: '@title',
                                 },
                             ],
                         },
@@ -107,7 +197,7 @@ module.exports = {
                 },
             },
             id: '@guid',
-            'contents': [
+            contents: [
                 {
                     //slickStructureGrid 滑动组件
                     // UnstructuredGrid 大海报
@@ -150,17 +240,40 @@ module.exports = {
                                     type: 12,
                                     href: mockjs.Random.image('320x180', mockjs.Random.color()),
                                 },
-                            ],
-                            trailerUrl:'https://imdb-video.media-imdb.com/vi3485450265/1434659607842-pgv4ql-1614818229304.mp4?Expires=1614958659&Signature=VSfYyDcOH1ZCTrwjVjtL773Jufd2jwdqnASymTwc5ZdEXGoV3shvDfsmMdLMwlL7Az1jINEJs~cpGEkG1agr--9YhnOMK~ysIPkedLeh3ZmgHM3x2GsGsy3~ZfxZsWLdLHVmEuQlir8sQgoJzejaeE0EDH3GX9H~65E71cFjNmAVP69NzJATOQUn0Z64K~fWcqd21cHYwl5FE0dASnRJcRHa6cx2k0bZypJNITLRZJCFNDtjYjN8240TVDYa5AKyDgesIOmiqE8f0HrMaOopm6DtiwSahikUDkYs7xa7rq2qdgG6qRIzSNgZ7jt6qW~6CFTjxOD54Bd77PLEsjbhhw__&Key-Pair-Id=APKAIFLZBVQZ24NQH3KA',
-                            'language|1': ['英语', '法语', '中文'],
-                            'tags|1-4': [
                                 {
-                                    tagName: '@cname',
-                                    'tagType|1': ['1', '2', '3'],
-                                    'tagItems|1-10': [
+                                    type: 14,
+                                    href: mockjs.Random.image('640x320', mockjs.Random.color()),
+                                },
+                            ],
+                            trailerUrl:
+                                'https://imdb-video.media-imdb.com/vi3485450265/1434659607842-pgv4ql-1614818229304.mp4?Expires=1614958659&Signature=VSfYyDcOH1ZCTrwjVjtL773Jufd2jwdqnASymTwc5ZdEXGoV3shvDfsmMdLMwlL7Az1jINEJs~cpGEkG1agr--9YhnOMK~ysIPkedLeh3ZmgHM3x2GsGsy3~ZfxZsWLdLHVmEuQlir8sQgoJzejaeE0EDH3GX9H~65E71cFjNmAVP69NzJATOQUn0Z64K~fWcqd21cHYwl5FE0dASnRJcRHa6cx2k0bZypJNITLRZJCFNDtjYjN8240TVDYa5AKyDgesIOmiqE8f0HrMaOopm6DtiwSahikUDkYs7xa7rq2qdgG6qRIzSNgZ7jt6qW~6CFTjxOD54Bd77PLEsjbhhw__&Key-Pair-Id=APKAIFLZBVQZ24NQH3KA',
+                            'language|1': ['英语', '法语', '中文'],
+                            'genres|1-10': [
+                                {
+                                    id: '@guid',
+                                    name: '@title',
+                                },
+                            ],
+                            'actors|1-10': [
+                                {
+                                    id: '@guid',
+                                    name: '@title',
+                                    images: [
                                         {
-                                            name: '@cname',
-                                            id: '@guid',
+                                            type: 10,
+                                            href: mockjs.Random.image('160x90', mockjs.Random.color()),
+                                        },
+                                        {
+                                            type: 15,
+                                            href: mockjs.Random.image('1600x900', mockjs.Random.color()),
+                                        },
+                                        {
+                                            type: 12,
+                                            href: mockjs.Random.image('320x180', mockjs.Random.color()),
+                                        },
+                                        {
+                                            type: 14,
+                                            href: mockjs.Random.image('640x320', mockjs.Random.color()),
                                         },
                                     ],
                                 },
@@ -168,13 +281,21 @@ module.exports = {
                             'seasons|1-10': [
                                 {
                                     id: '@guid',
-                                    seasonName: '@ctitle',
-                                    'episodeList|1-40': [
+                                    name: '@ctitle',
+                                    'episodes|1-40': [
                                         {
                                             'playDuration|1-400': 1,
                                             'episodeNumber|1-100': 1,
                                             description: '@cparagraph(1,3)',
                                             poster: mockjs.Random.image('160x90'),
+                                            images: [
+                                                {
+                                                    type: 10,
+                                                    href: mockjs.Random.image('160x90', mockjs.Random.color()),
+                                                },
+                                            ],
+                                            playUrl: '@title',
+                                            title: '@title',
                                         },
                                     ],
                                 },

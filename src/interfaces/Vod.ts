@@ -18,7 +18,7 @@ export interface Episode {
     episodeNumber: number;
     title?: string;
     description?: string;
-    poster?: string;
+    images: Image[];
     playUrl?: string;
     playDuration?: number;
 }
@@ -53,8 +53,8 @@ export interface Vod {
     seasons?: Season[];
     trailerUrl?: string;
     playUrl?: string;
-    vodType?: number;
-    genres?: Genre[];
-    actors?: Actor[];
+    vodType: number;
+    genres: Genre[];
+    actors: Actor[];
     formatInformation?: FormatInformation;
 }

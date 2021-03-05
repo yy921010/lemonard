@@ -3,8 +3,9 @@ import tw, { styled, css } from 'twin.macro';
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import { Vod } from '@/interfaces';
 import getImageUrl from '@/utils';
+import { useCountDown, useDebounceFn } from 'ahooks';
 import { Button, Icon, Poster } from '../UIKit';
-import MiniPlayer from './MiniPlayer';
+import MiniPlayer from './MiniPlayerModal';
 
 export interface MiniModalProps extends MiniModalCss {
     layoutId: string;
@@ -30,17 +31,15 @@ export const MiniModalContainer = styled(motion.div)(({ width, top, left, height
     `,
 ]);
 
-export const PosterMask = styled.div(({ isLoaded }: { isLoaded: boolean }) => [
+export const PosterMask = styled.div(() => [
     tw`absolute top-0 left-0 right-0 bottom-0 p-8 box-border z-40 opacity-100 transition-opacity`,
-    isLoaded ? tw`opacity-0` : '',
     css`
         background-image: linear-gradient(180deg, transparent, #000);
     `,
 ]);
 
-export const PosterButton = styled.div(({ isLoaded }: { isLoaded: boolean }) => [
+export const PosterButton = styled.div(() => [
     tw`absolute top-10 right-4 w-12 z-40 flex flex-col space-y-2 opacity-100 transition-opacity`,
-    isLoaded ? tw`opacity-0` : '',
 ]);
 
 const MiniModal: React.FC<MiniModalProps> = ({
@@ -55,6 +54,22 @@ const MiniModal: React.FC<MiniModalProps> = ({
     onShowMoreHandle,
 }) => {
     const [isLoaded, setLoaded] = useState<boolean>(false);
+
+    const [, setTargetDate] = useCountDown({
+        onEnd: () => {
+            setLoaded(true);
+        },
+    });
+
+    const { run } = useDebounceFn(
+        () => {
+            setTargetDate(Date.now() + 1500);
+        },
+        {
+            wait: 500,
+        },
+    );
+
     return (
         <AnimateSharedLayout type="crossfade">
             {children}
@@ -68,6 +83,7 @@ const MiniModal: React.FC<MiniModalProps> = ({
                         height={height}
                         onMouseLeave={() => {
                             if (onMouseLeaveHandle) {
+                                setLoaded(false);
                                 onMouseLeaveHandle();
                             }
                         }}
@@ -77,41 +93,56 @@ const MiniModal: React.FC<MiniModalProps> = ({
                                 src={getImageUrl(vod.images, 12)}
                                 aspectRatio={16 / 9}
                                 onMouseMove={() => {
-                                    setLoaded(true);
+                                    setLoaded(false);
+                                    run();
                                 }}
                             >
                                 <MiniPlayer
                                     playUrl={vod.trailerUrl || ''}
                                     isShow={!!layoutId}
                                     isMute={false}
-                                    onLoadedmetadata={() => {
-                                        setLoaded(true);
+                                    onCanplay={() => {
+                                        setTargetDate(Date.now() + 1500);
                                     }}
                                 />
-                                <PosterMask isLoaded={isLoaded}>
-                                    <div tw="text-2xl absolute bottom-20">{vod.title}</div>
-                                    <div tw="text-sm absolute bottom-10">
-                                        {vod.time} | {vod.language} | {vod.time}
-                                    </div>
-                                </PosterMask>
-                                <PosterButton isLoaded={isLoaded}>
-                                    <Button circle>
-                                        <Icon name="play" type="fill" />
-                                    </Button>
-                                    <Button circle>
-                                        <Icon name="volume-mute" type="fill" />
-                                    </Button>
-                                    <Button
-                                        circle
-                                        onClick={() => {
-                                            if (onShowMoreHandle) {
-                                                onShowMoreHandle(vod);
-                                            }
-                                        }}
-                                    >
-                                        <Icon name="arrow-down-s" />
-                                    </Button>
-                                </PosterButton>
+                                <motion.div
+                                    tw="absolute left-0 right-0 top-0 bottom-0"
+                                    animate={isLoaded ? 'hidden' : 'show'}
+                                    variants={{
+                                        show: {
+                                            opacity: 1,
+                                        },
+                                        hidden: {
+                                            opacity: 0,
+                                        },
+                                    }}
+                                    transition={{ type: 'spring', duration: 2 }}
+                                >
+                                    <PosterMask>
+                                        <div tw="text-2xl absolute bottom-20">{vod.title}</div>
+                                        <div tw="text-sm absolute bottom-10">
+                                            {vod.time} | {vod.language} | {vod.time}
+                                        </div>
+                                    </PosterMask>
+                                    <PosterButton>
+                                        <Button circle>
+                                            <Icon name="play" type="fill" />
+                                        </Button>
+                                        <Button circle>
+                                            <Icon name="volume-mute" type="fill" />
+                                        </Button>
+                                        <Button
+                                            circle
+                                            onClick={() => {
+                                                if (onShowMoreHandle) {
+                                                    onShowMoreHandle(vod);
+                                                }
+                                            }}
+                                        >
+                                            <Icon name="arrow-down-s" />
+                                        </Button>
+                                    </PosterButton>
+                                </motion.div>
                             </Poster>
                         ) : (
                             ''

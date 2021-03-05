@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useRequest } from 'ahooks';
+import { Route, Switch, useHistory, useParams } from 'react-router-dom';
+import { useDebounceFn, useRequest } from 'ahooks';
 import { Helmet } from 'react-helmet';
-import { Billboard, MiniModal, MiniModalProps, PosterWall, StructureGrid } from '@/components';
+import { Billboard, Detail, MiniModal, MiniModalProps, PosterWall, StructureGrid } from '@/components';
 import { ContentType, Navigator } from '@/interfaces/Navigator';
 import getImageUrl from '@/utils';
 import { Vod } from '@/interfaces';
 import { NavigatorContainer } from './styled';
-
-let timeId: NodeJS.Timeout;
+import 'twin.macro';
 
 // TODO: 组件数据链接
-// TODO: 海报预览
 // TODO: 详情页面链接
 // 3.7 号发布 0.1 版本
 
@@ -20,6 +18,7 @@ function NavigatorDetail(): JSX.Element {
     const { data } = useRequest<Navigator>(`/menu/${id}`, {
         ready: !!id,
     });
+    let history = useHistory();
 
     const handleMore = (link: string) => {};
 
@@ -31,49 +30,53 @@ function NavigatorDetail(): JSX.Element {
         height: 0,
     });
 
-    const showMiniModal = (boundingClientRect: DOMRect, teaser: Vod) => {
-        const browserWidth = window.outerWidth;
-        if (boundingClientRect) {
-            const { left, top, width } = boundingClientRect;
-            let finalLeft: number = left - 80;
-            if (left <= 50) {
-                finalLeft = left;
-            } else if (browserWidth <= 758) {
-                const maxLeft = boundingClientRect.width * 2;
-                if (left >= maxLeft) {
-                    finalLeft = left - 150;
+    const { run, cancel } = useDebounceFn(
+        (boundingClientRect: DOMRect, teaser: Vod) => {
+            const browserWidth = window.outerWidth;
+            if (boundingClientRect) {
+                const { left, top, width } = boundingClientRect;
+                let finalLeft: number = left - 80;
+                if (left <= 50) {
+                    finalLeft = left;
+                } else if (browserWidth <= 758) {
+                    const maxLeft = boundingClientRect.width * 2;
+                    if (left >= maxLeft) {
+                        finalLeft = left - 150;
+                    }
+                } else if (browserWidth > 758 && browserWidth <= 1024) {
+                    const maxLeft = boundingClientRect.width * 3;
+                    if (left >= maxLeft) {
+                        finalLeft = left - 180;
+                    }
+                } else if (browserWidth > 758 && browserWidth <= 1280) {
+                    const maxLeft = boundingClientRect.width * 4;
+                    if (left >= maxLeft) {
+                        finalLeft = left - 180;
+                    }
+                } else if (browserWidth > 1280) {
+                    const maxLeft = boundingClientRect.width * 5;
+                    if (left >= maxLeft) {
+                        finalLeft = left - 100;
+                    }
                 }
-            } else if (browserWidth > 758 && browserWidth <= 1024) {
-                const maxLeft = boundingClientRect.width * 3;
-                if (left >= maxLeft) {
-                    finalLeft = left - 180;
-                }
-            } else if (browserWidth > 758 && browserWidth <= 1280) {
-                const maxLeft = boundingClientRect.width * 4;
-                if (left >= maxLeft) {
-                    finalLeft = left - 180;
-                }
-            } else if (browserWidth > 1280) {
-                const maxLeft = boundingClientRect.width * 5;
-                if (left >= maxLeft) {
-                    finalLeft = left - 100;
-                }
-            }
 
-            const modalWidth = width + 150;
-            setPositionModal({
-                width: modalWidth,
-                left: finalLeft,
-                top: top + document.documentElement.scrollTop - 40,
-                layoutId: teaser.id,
-                vod: teaser,
-                height: (modalWidth * 9) / 16,
-            });
-        }
-    };
+                const modalWidth = width + 150;
+                setPositionModal({
+                    width: modalWidth,
+                    left: finalLeft,
+                    top: top + document.documentElement.scrollTop - 40,
+                    layoutId: teaser.id,
+                    vod: teaser,
+                    height: (modalWidth * 9) / 16,
+                });
+            }
+        },
+        {
+            wait: 1000,
+        },
+    );
 
     const onMouseEnterHandle = (event: React.MouseEvent, teaser: Vod) => {
-        clearTimeout(timeId);
         const boundingClientRect = event.currentTarget.getBoundingClientRect();
         setPositionModal({
             left: 0,
@@ -82,10 +85,13 @@ function NavigatorDetail(): JSX.Element {
             layoutId: '',
             height: 0,
         });
-        timeId = setTimeout(() => {
-            showMiniModal(boundingClientRect, teaser);
-        }, 1000);
+        run(boundingClientRect, teaser);
     };
+
+    const onHoverEndHandle = (vod: Vod) => {
+        history.push(`/navigator/${vod.id}/detail`);
+    };
+
     return (
         <>
             {data ? (
@@ -103,7 +109,7 @@ function NavigatorDetail(): JSX.Element {
                                         key={item.id}
                                         {...positionModal}
                                         onMouseLeaveHandle={() => {
-                                            clearTimeout(timeId);
+                                            cancel();
                                             setPositionModal({
                                                 left: 0,
                                                 top: 0,
@@ -117,9 +123,7 @@ function NavigatorDetail(): JSX.Element {
                                         <StructureGrid
                                             teasers={item.teasers}
                                             content={item}
-                                            onHoverEndHandle={() => {
-                                                clearTimeout(timeId);
-                                            }}
+                                            onHoverEndHandle={() => {}}
                                             onHoverStartHandle={onMouseEnterHandle}
                                             onMoreHandle={() => {
                                                 handleMore(item.laneContentLink);
@@ -143,21 +147,21 @@ function NavigatorDetail(): JSX.Element {
                                     key={item.id}
                                     {...positionModal}
                                     onMouseLeaveHandle={() => {
-                                        clearTimeout(timeId);
-                                        // setPositionModal({
-                                        //     left: 0,
-                                        //     top: 0,
-                                        //     width: 0,
-                                        //     layoutId: '',
-                                        //     height: 0,
-                                        // });
+                                        cancel();
+                                        setPositionModal({
+                                            left: 0,
+                                            top: 0,
+                                            width: 0,
+                                            layoutId: '',
+                                            height: 0,
+                                        });
                                     }}
-                                    onShowMoreHandle={(vod) => {}}
+                                    onShowMoreHandle={onHoverEndHandle}
                                 >
                                     <PosterWall
                                         teasers={item.teasers}
                                         onHoverEndHandle={() => {
-                                            clearTimeout(timeId);
+                                            cancel();
                                         }}
                                         onHoverStartHandle={onMouseEnterHandle}
                                     />
@@ -165,6 +169,9 @@ function NavigatorDetail(): JSX.Element {
                             );
                         })}
                     </NavigatorContainer>
+                    <Switch>
+                        <Route exact path="/navigator/:id/detail" component={Detail} />
+                    </Switch>
                 </>
             ) : (
                 <></>
