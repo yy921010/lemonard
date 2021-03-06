@@ -63,3 +63,17 @@ export const EpisodeTitleWrap = tw.section`flex justify-between px-6 mt-10 h-14 
 export const EpisodeListWrap = tw.ul``;
 
 export const EpisodeNextButton = tw.div`text-center -mt-6`;
+
+export const VodMask = styled.div(() => [tw`fixed top-0 right-0 left-0 bottom-0 bg-black bg-opacity-70 h-full z-30`]);
+
+export const VodModalRoot = styled.div(() => [
+    tw`fixed top-0 right-0 left-0 bottom-0 bg-black bg-opacity-70 h-full z-30 overflow-auto`,
+]);
+export const VodModalContent = styled.div(() => [tw`md:w-10/12 lg:w-7/12 mx-auto`]);
+export const VodModalContentMain = styled.div(() => [
+    tw`text-white relative border border-transparent
+  rounded-md outline-width[0] background-clip[padding-box] mt-20`,
+    css`
+        background-color: #181818;
+    `,
+]);

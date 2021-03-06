@@ -7,6 +7,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './i18n';
 import 'remixicon/fonts/remixicon.css';
+import './index.css';
 
 ReactDOM.render(
     <BrowserRouter>

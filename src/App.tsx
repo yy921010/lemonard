@@ -8,25 +8,23 @@ const App = (): JSX.Element => {
     return (
         <>
             <Navbar />
-            <section tw="flex flex-col items-center">
-                <section tw="w-full flex-shrink bg-black bg-opacity-90 text-gray-100">
-                    <Switch>
-                        {routes && routes.length > 0
-                            ? routes.map((item) => {
-                                  return (
-                                      <Route
-                                          key={item.name}
-                                          exact={item.exact}
-                                          path={item.path}
-                                          component={item.component}
-                                      />
-                                  );
-                              })
-                            : ''}
-                    </Switch>
-                </section>
-                <Footer />
+            <section tw="bg-black bg-opacity-90 text-gray-100 flex-1 pb-20">
+                <Switch>
+                    {routes && routes.length > 0
+                        ? routes.map((item) => {
+                              return (
+                                  <Route
+                                      key={item.name}
+                                      exact={item.exact}
+                                      path={item.path}
+                                      component={item.component}
+                                  />
+                              );
+                          })
+                        : ''}
+                </Switch>
             </section>
+            <Footer />
         </>
     );
 };

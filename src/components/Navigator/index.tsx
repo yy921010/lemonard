@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Route, Switch, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { useDebounceFn, useRequest } from 'ahooks';
 import { Helmet } from 'react-helmet';
 import { Billboard, Detail, MiniModal, MiniModalProps, PosterWall, StructureGrid } from '@/components';
@@ -9,16 +9,18 @@ import { Vod } from '@/interfaces';
 import { NavigatorContainer } from './styled';
 import 'twin.macro';
 
-// TODO: 组件数据链接
-// TODO: 详情页面链接
-// 3.7 号发布 0.1 版本
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
 
 function NavigatorDetail(): JSX.Element {
     const { id } = useParams<{ id: string }>();
     const { data } = useRequest<Navigator>(`/menu/${id}`, {
         ready: !!id,
     });
-    let history = useHistory();
+    const history = useHistory();
+
+    const query = useQuery();
 
     const handleMore = (link: string) => {};
 
@@ -89,7 +91,7 @@ function NavigatorDetail(): JSX.Element {
     };
 
     const onHoverEndHandle = (vod: Vod) => {
-        history.push(`/navigator/${vod.id}/detail`);
+        history.push(`/navigator/${id}?vod-id=${vod.id}`);
     };
 
     return (
@@ -169,9 +171,7 @@ function NavigatorDetail(): JSX.Element {
                             );
                         })}
                     </NavigatorContainer>
-                    <Switch>
-                        <Route exact path="/navigator/:id/detail" component={Detail} />
-                    </Switch>
+                    <Detail vodId={query.get('vod-id') || ''} navigatorId={id} />
                 </>
             ) : (
                 <></>

@@ -36,7 +36,7 @@ export const VignetteLayer = styled.div(() => [
     `,
 ]);
 
-export const NavigatorContainer = tw.div``;
+export const NavigatorContainer = tw.div`pt-28`;
 
 export const NavigatorContainer1 = tw.div``;
 

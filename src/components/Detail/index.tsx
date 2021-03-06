@@ -3,7 +3,7 @@ import { Button, Icon } from '@/components/UIKit';
 import { useRequest } from 'ahooks';
 import { Vod } from '@/interfaces';
 import { getImageUrl } from '@/utils';
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Seasons from './Season';
 import 'twin.macro';
 import {
@@ -21,6 +21,10 @@ import {
     VodMetaTag,
     VodMetaTagLabel,
     VodMetaTagItems,
+    VodMask,
+    VodModalRoot,
+    VodModalContent,
+    VodModalContentMain,
 } from './styled';
 
 interface Tag {
@@ -32,11 +36,13 @@ interface DetailTag {
     tags: Tag[];
 }
 
-const Detail: React.FC = () => {
-    const { id } = useParams<{ id: string }>();
+const Detail: React.FC<{
+    vodId?: string;
+    navigatorId: string;
+}> = ({ vodId, navigatorId }) => {
     let history = useHistory();
     const { data: vodInfo } = useRequest<Vod>(`/vod-info`, {
-        ready: !!id,
+        ready: !!vodId,
     });
 
     const detailTags = useMemo<DetailTag[]>(() => {
@@ -60,17 +66,17 @@ const Detail: React.FC = () => {
         };
         return [actorTag, genreTag] as DetailTag[];
     }, [vodInfo]);
-    return vodInfo ? (
+    return vodInfo && vodId ? (
         <>
-            <div tw="fixed top-0 right-0 left-0 bottom-0 bg-black bg-opacity-70 h-full z-30" />
-            <div tw="fixed top-0 right-0 left-0 bottom-0 bg-black bg-opacity-70 h-full z-30 overflow-auto">
-                <div tw="md:w-10/12 lg:w-7/12 mx-auto">
-                    <div tw="text-white relative bg-black bg-opacity-80 border border-transparent rounded-md outline-width[0] background-clip[padding-box]">
+            <VodMask />
+            <VodModalRoot>
+                <VodModalContent>
+                    <VodModalContentMain>
                         <Button
                             circle
                             tw="absolute right-5 top-5 shadow-xl z-50"
                             onClick={() => {
-                                history.push(`/navigator/${id}`);
+                                history.push(`/navigator/${navigatorId}`);
                             }}
                         >
                             <Icon name="close" tw="text-gray-100 text-2xl" />
@@ -133,9 +139,9 @@ const Detail: React.FC = () => {
                                 ''
                             )}
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </VodModalContentMain>
+                </VodModalContent>
+            </VodModalRoot>
         </>
     ) : (
         <></>

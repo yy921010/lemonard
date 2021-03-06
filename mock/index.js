@@ -28,7 +28,7 @@ module.exports = {
                 },
             ],
             trailerUrl:
-            'https://imdb-video.media-imdb.com/vi3333537817/1434659607842-pgv4ql-1614085345509.mp4?Expires=1615047200&Signature=kGrTiJhJKzroLQ8RPhi4RZMVwBZVkh4FTMMeF2mo8fGHIXq5n2MHHadpjm1gDJg7~vMpv9rjiz1MY9TD9J9MHygN5ITS8dh73N9Wz-G~paqQYRvt4cKQqXgOID23fcT1DwM7jGVKSip585vpP3DK7-3hEo8wEsU6A44FdBSZf7DKd5v-v6BUU1K0Vj4XuFKjj2zVx09HmH87TNL15sFRLsB3Wwm4XtdwPTR4u013fQisUDqVHttlzZo8xjIUxwBU~x8taRHKfmlJ6ZzmU7DnqNEjdA96AV~Rj372Fl2bFxdSGagoxcR-vwwAYTy2x9idmcPKVVblZfGSaoiOJ~fztg__&Key-Pair-Id=APKAIFLZBVQZ24NQH3KA',
+            'http://movietrailers.apple.com/movies/marvel/avengersageofultron/avengersageofultron-tlr1_h480p.mov',
             'language|1': ['英语', '法语', '中文'],
             'genres|1-10': [
                 {
@@ -246,7 +246,7 @@ module.exports = {
                                 },
                             ],
                             trailerUrl:
-                                'https://imdb-video.media-imdb.com/vi3485450265/1434659607842-pgv4ql-1614818229304.mp4?Expires=1614958659&Signature=VSfYyDcOH1ZCTrwjVjtL773Jufd2jwdqnASymTwc5ZdEXGoV3shvDfsmMdLMwlL7Az1jINEJs~cpGEkG1agr--9YhnOMK~ysIPkedLeh3ZmgHM3x2GsGsy3~ZfxZsWLdLHVmEuQlir8sQgoJzejaeE0EDH3GX9H~65E71cFjNmAVP69NzJATOQUn0Z64K~fWcqd21cHYwl5FE0dASnRJcRHa6cx2k0bZypJNITLRZJCFNDtjYjN8240TVDYa5AKyDgesIOmiqE8f0HrMaOopm6DtiwSahikUDkYs7xa7rq2qdgG6qRIzSNgZ7jt6qW~6CFTjxOD54Bd77PLEsjbhhw__&Key-Pair-Id=APKAIFLZBVQZ24NQH3KA',
+                                'https://imdb-video.media-imdb.com/vi3485450265/1434659607842-pgv4ql-1614818229304.mp4',
                             'language|1': ['英语', '法语', '中文'],
                             'genres|1-10': [
                                 {
