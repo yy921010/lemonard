@@ -2,7 +2,7 @@ import React from 'react';
 import tw, { styled, css } from 'twin.macro';
 import { motion } from 'framer-motion';
 import { Content, Vod } from '@/interfaces';
-import getImageUrl from '@/utils';
+import { getImageUrl } from '@/utils';
 import { Poster, SlickList } from '../UIKit';
 
 export interface StructureGridProps {

@@ -5,4 +5,4 @@ export const getImageUrl = (images: Image[], imgType: number): string => {
     return image ? image.href : '';
 };
 
-export default getImageUrl;
+export default '';

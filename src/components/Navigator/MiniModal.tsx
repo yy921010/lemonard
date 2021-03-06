@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import tw, { styled, css } from 'twin.macro';
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import { Vod } from '@/interfaces';
-import getImageUrl from '@/utils';
+import { getImageUrl } from '@/utils';
 import { useCountDown, useDebounceFn } from 'ahooks';
 import { Button, Icon, Poster } from '../UIKit';
 import MiniPlayer from './MiniPlayerModal';

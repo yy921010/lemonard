@@ -4,7 +4,7 @@ import { useDebounceFn, useRequest } from 'ahooks';
 import { Helmet } from 'react-helmet';
 import { Billboard, Detail, MiniModal, MiniModalProps, PosterWall, StructureGrid } from '@/components';
 import { ContentType, Navigator } from '@/interfaces/Navigator';
-import getImageUrl from '@/utils';
+import { getImageUrl } from '@/utils';
 import { Vod } from '@/interfaces';
 import { NavigatorContainer } from './styled';
 import 'twin.macro';

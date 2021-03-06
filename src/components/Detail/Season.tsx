@@ -3,7 +3,7 @@ import { Button, Icon, Select, Poster } from '@/components/UIKit';
 import 'twin.macro';
 
 import { Episode, Season } from '@/interfaces';
-import getImageUrl from '@/utils';
+import { getImageUrl } from '@/utils';
 import {
     EpisodeMainTitle,
     EpisodeDescription,
