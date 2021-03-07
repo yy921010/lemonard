@@ -39,6 +39,7 @@ jobs:
         build:
             runs-on: ubuntu-latest
             steps:
+                - name: 克隆下载
                 - uses: actions/checkout@v2
                 - uses: Klemensas/action-autotag@stable
                   with:
