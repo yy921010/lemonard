@@ -30,6 +30,6 @@ jobs:
                   FTP_USERNAME: ${{ secrets.USER_NAME }}
                   FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
                   METHOD: sftp
-                  LOCAL_DIR: dist
+                  LOCAL_DIR: build
                   REMOTE_DIR: /usr/share/nginx/html
                   ARGS: --delete
