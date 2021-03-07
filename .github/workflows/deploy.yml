@@ -41,6 +41,7 @@ jobs:
             steps:
                 - name: 克隆下载
                 - uses: actions/checkout@v2
+
                 - uses: Klemensas/action-autotag@stable
                   with:
                       GITHUB_TOKEN: '${{ secrets.DE_TO }}'
