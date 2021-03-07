@@ -1,4 +1,4 @@
-name: 构建与发布
+name: build
 on:
     push:
         branches:
@@ -7,24 +7,24 @@ on:
         branches:
             - master
 jobs:
-    lemon-Deploy-Action:
-        name: Tomokotv-Deploy-Action
+    lemon_deploy_font_end:
+        name: lemon
         runs-on: ubuntu-latest
         steps:
-            - name: 克隆下载
+            - name: git clone
             - uses: actions/checkout@v2
 
             - name: Use Node.js 12.x
               uses: actions/setup-node@v1
               with:
                   node-version: '12.x'
-            - name: 安装依赖并构建
+            - name: install depth then build
               run: |
                   npm i
                   npm run build
-            - name: 查看文件目录
+            - name: show folders
               run: ls
-            - name: 上传到服务器
+            - name: upload serve
               uses: SamKirkland/FTP-Deploy-Action@2.0.0
               env:
                   FTP_SERVER: ${{ secrets.FTP_IP }}
@@ -34,3 +34,15 @@ jobs:
                   LOCAL_DIR: build
                   REMOTE_DIR: /usr/share/nginx/html
                   ARGS: --delete
+
+    GIT-Tags:
+        needs: [lemon_deploy_font_end]
+        runs-on: ubuntu-latest
+        steps:
+            - name: git clone
+            - uses: actions/checkout@v2
+
+            - uses: Klemensas/action-autotag@stable
+              with:
+                  GITHUB_TOKEN: '${{ secrets.DE_TO }}'
+                  tag_prefix: 'v'
