@@ -1,6 +1,6 @@
 {
   "name": "tomokotv-typescript-version",
-  "version": "0.1.0",
+  "version": "0.2.210307_alpha",
   "private": true,
   "dependencies": {
     "@tailwindcss/postcss7-compat": "^2.0.2",
