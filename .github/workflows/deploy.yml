@@ -19,8 +19,9 @@ jobs:
                   node-version: '12.x'
             - name: install depth then build
               run: |
-                  npm i
-                  npm run build
+                  npm i -g yarn
+                  yarn
+                  yarn run build
             - name: show folders
               run: ls
             - name: upload serve
