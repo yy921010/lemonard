@@ -6,6 +6,7 @@ import { Billboard, Detail, MiniModal, MiniModalProps, PosterWall, StructureGrid
 import { ContentType, Navigator } from '@/interfaces/Navigator';
 import { getImageUrl } from '@/utils';
 import { Vod } from '@/interfaces';
+import poData from '@/data';
 import { NavigatorContainer } from './styled';
 import 'twin.macro';
 
@@ -15,9 +16,11 @@ function useQuery() {
 
 function NavigatorDetail(): JSX.Element {
     const { id } = useParams<{ id: string }>();
-    const { data } = useRequest<Navigator>(`/menu/${id}`, {
-        ready: !!id,
-    });
+    // const { data } = useRequest<Navigator>(`/menu/${id}`, {
+    //     ready: !!id,
+    // });
+    const data = (poData as unknown) as Navigator;
+    console.log('data', data);
     const history = useHistory();
 
     const query = useQuery();

@@ -28,7 +28,7 @@ module.exports = {
                 },
             ],
             trailerUrl:
-            'http://movietrailers.apple.com/movies/marvel/avengersageofultron/avengersageofultron-tlr1_h480p.mov',
+                'http://movietrailers.apple.com/movies/marvel/avengersageofultron/avengersageofultron-tlr1_h480p.mov',
             'language|1': ['英语', '法语', '中文'],
             'genres|1-10': [
                 {

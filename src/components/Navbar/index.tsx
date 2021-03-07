@@ -23,7 +23,15 @@ export interface Menu {
 const NavBar: React.FC = () => {
     const [bgBlackNumber, setBgBlackNumber] = useState<number>(0);
     const [isShowMenu, setShowMenu] = useState<boolean>(false);
-    const { data } = useRequest<Menu[]>('/menu');
+    // const { data } = useRequest<Menu[]>('/menu');
+
+    const data = [
+        {
+            id: '1',
+            title: '点播',
+            isMain: 1,
+        },
+    ];
 
     const run = () => {
         if (window.pageYOffset < 80) {

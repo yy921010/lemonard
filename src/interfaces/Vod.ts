@@ -20,7 +20,7 @@ export interface Episode {
     description?: string;
     images: Image[];
     playUrl?: string;
-    playDuration?: number;
+    playDuration?: string;
 }
 
 export interface FormatInformation {

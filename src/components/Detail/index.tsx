@@ -4,8 +4,10 @@ import { useRequest } from 'ahooks';
 import { Vod } from '@/interfaces';
 import { getImageUrl } from '@/utils';
 import { useHistory } from 'react-router-dom';
+import poData from '@/data';
 import Seasons from './Season';
 import 'twin.macro';
+
 import {
     VodBackground,
     PreModalInfo,
@@ -41,9 +43,11 @@ const Detail: React.FC<{
     navigatorId: string;
 }> = ({ vodId, navigatorId }) => {
     let history = useHistory();
-    const { data: vodInfo } = useRequest<Vod>(`/vod-info`, {
-        ready: !!vodId,
-    });
+    // const { data: vodInfo } = useRequest<Vod>(`/vod-info`, {
+    //     ready: !!vodId,
+    // });
+
+    const vodInfo = (poData.contents[0].teasers[0] as unknown) as Vod;
 
     const detailTags = useMemo<DetailTag[]>(() => {
         if (!vodInfo) {
