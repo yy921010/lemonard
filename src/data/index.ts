@@ -33,19 +33,19 @@ const navigatorData = {
                     images: [
                         {
                             type: 10,
-                            href: 'https://img1.doubanio.com/view/photo/m/public/p2634679527.webp',
+                            href: 'https://www.themoviedb.org/t/p/w1000_and_h563_face/1i1N0AVRb54H6ZFPDTwbo9MLxSF.jpg',
                         },
                         {
                             type: 15,
-                            href: 'https://img2.doubanio.com/view/photo/m/public/p2629574483.webp',
+                            href: 'https://www.themoviedb.org/t/p/w1000_and_h563_face/3I42vsOttALTxTxdnU4WM8rOPWk.jpg',
                         },
                         {
                             type: 12,
-                            href: 'https://img1.doubanio.com/view/photo/m/public/p2560107797.webp',
+                            href: 'https://www.themoviedb.org/t/p/w1000_and_h563_face/57vVjteucIF3bGnZj6PmaoJRScw.jpg',
                         },
                         {
                             type: 14,
-                            href: 'https://img1.doubanio.com/view/photo/m/public/p2634679527.webp',
+                            href: 'https://www.themoviedb.org/t/p/w1000_and_h563_face/cq62fLH3vwOmiaLKMqkDI86tPtH.jpg',
                         },
                     ],
                     trailerUrl: 'https://vfx.mtime.cn/Video/2021/02/03/mp4/210203160313611195_480.mp4',

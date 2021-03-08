@@ -1,5 +1,6 @@
-import { Home, VodId, Guide, NotFound, Live, Vod } from '@/screen/Root';
-import { Navigator } from '@/components';
+import { Genre } from './genre';
+import { Home } from './home';
+import { NotFound } from './not-found';
 
 const isShown = true;
 
@@ -12,32 +13,9 @@ const routes = [
         isShown,
     },
     {
-        name: 'header.live',
-        component: Live,
-        path: '/live',
-        isShown,
-    },
-    {
-        name: 'header.vod',
-        component: Vod,
-        path: '/vod',
-        exact: true,
-        isShown,
-    },
-    {
-        name: 'detail',
-        component: VodId,
-        path: '/vod/:id',
-    },
-    {
-        name: 'guide',
-        component: Guide,
-        path: '/guide',
-    },
-    {
-        name: 'Navigator',
-        component: Navigator,
-        path: '/navigator/:id',
+        name: 'genre',
+        component: Genre,
+        path: '/genre/:id',
     },
     {
         name: 'notFound',

@@ -10,18 +10,7 @@ module.exports = {
     plugins:[ new WebpackBar()]
   },
   babel: {
-    plugins: [
-      [
-        'babel-plugin-styled-components',
-        {
-          ...whenProd(() => {
-            return {
-              displayName: false,
-            };
-          }),
-        },
-      ],
-    ],
+    plugins: [],
   },
   style: {
     postcss: {

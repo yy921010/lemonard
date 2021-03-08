@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Navbar, Footer } from '@/components';
+import { Navbar, Footer } from '@/router/common';
 import routes from '@/router';
 import 'twin.macro';
 
