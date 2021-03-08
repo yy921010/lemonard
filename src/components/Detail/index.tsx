@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { Button, Icon } from '@/components/UIKit';
-import { useRequest } from 'ahooks';
 import { Vod } from '@/interfaces';
 import { getImageUrl } from '@/utils';
 import { useHistory } from 'react-router-dom';

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
-import { useDebounceFn, useRequest } from 'ahooks';
+import { useDebounceFn } from 'ahooks';
 import { Helmet } from 'react-helmet';
 import { Billboard, Detail, MiniModal, MiniModalProps, PosterWall, StructureGrid } from '@/components';
 import { ContentType, Navigator } from '@/interfaces/Navigator';
