@@ -34,7 +34,7 @@ const PosterWall: React.FC<PosterWallProps> = ({ teasers, onHoverStartHandle, on
                                 tw="mx-0.5 sm:mx-1 md:mx-1.5 mb-2"
                             />
                         </motion.div>
-                        <motion.h4 tw="text-sm md:text-xl">{teaser.title}</motion.h4>
+                        <motion.h4 tw="text-sm md:text-xl px-2">{teaser.title}</motion.h4>
                     </motion.div>
                 );
             })}

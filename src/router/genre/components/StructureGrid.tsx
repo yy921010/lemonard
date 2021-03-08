@@ -74,7 +74,7 @@ const StructureGrid: React.FC<StructureGridProps> = ({
                                     tw="mx-0.5 sm:mx-1 md:mx-1.5 mb-2"
                                 />
                             </motion.div>
-                            <h4 tw="text-sm md:text-xl">{teaser.title}</h4>
+                            <h4 tw="text-sm md:text-xl px-4">{teaser.title}</h4>
                         </div>
                     );
                 })

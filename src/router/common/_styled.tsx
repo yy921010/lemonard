@@ -15,6 +15,7 @@ export const MenuList = tw.div`top-2`;
 export const MenuItem = tw.div`h-10 text-gray-50 px-10 leading-10 cursor-pointer hover:(text-gray-300 bg-white bg-opacity-5)`;
 export const MainMenus = tw.div`hidden lg:(flex space-x-2)`;
 
-export const MainMenuItem = styled(NavLink)(() => [
+export const MainMenuItem = styled(NavLink)(({ activeClassName }) => [
     tw`h-10 text-gray-50 px-10 leading-10 cursor-pointer relative hover:(after:(content w-full h-1 bg-yellow-400 absolute top-10 left-0))`,
+    activeClassName ? tw`after:(content w-full h-1 bg-yellow-400 absolute top-10 left-0)` : '',
 ]);

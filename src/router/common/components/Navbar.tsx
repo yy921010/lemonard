@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import 'twin.macro';
 import { Icon } from '@/components';
 import { useRequest } from 'ahooks';
+import { Menu } from '@/interfaces';
+import { useHistory } from 'react-router-dom';
 import {
     Nav,
     NavContainer,
@@ -14,16 +16,11 @@ import {
     MainMenuItem,
 } from '../_styled';
 
-export interface Menu {
-    id: string;
-    title: string;
-    isMain: number;
-}
-
 const NavBar: React.FC = () => {
     const [bgBlackNumber, setBgBlackNumber] = useState<number>(0);
     const [isShowMenu, setShowMenu] = useState<boolean>(false);
     const { data } = useRequest<Menu[]>('/menu');
+    const history = useHistory();
 
     const run = () => {
         if (window.pageYOffset < 80) {
@@ -46,6 +43,10 @@ const NavBar: React.FC = () => {
         console.log('ssss');
     };
 
+    const reBackHome = () => {
+        history.push('/home');
+    };
+
     return (
         <Nav
             style={{
@@ -54,7 +55,7 @@ const NavBar: React.FC = () => {
         >
             <NavContainer>
                 <Icon name="menu" tw="text-2xl cursor-pointer text-gray-50 lg:hidden" onClick={handleShowMenu} />
-                <img tw="w-16" src="/img/logo.png" alt="logo" />
+                <img tw="w-16" src="/img/logo.png" alt="logo" onClick={reBackHome} aria-hidden="true" />
                 <MainMenus>
                     {data &&
                         data
@@ -92,7 +93,7 @@ const NavBar: React.FC = () => {
                                             <MenuItem
                                                 key={item.id}
                                                 onClick={(event: { stopPropagation: () => void }) => {
-                                                    // targetPages(item.url);
+                                                    history.push(`/genre/${item.id}`);
                                                     event.stopPropagation();
                                                 }}
                                             >

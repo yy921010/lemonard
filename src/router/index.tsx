@@ -2,15 +2,13 @@ import { Genre } from './genre';
 import { Home } from './home';
 import { NotFound } from './not-found';
 
-const isShown = true;
-
 const routes = [
     {
         name: 'header.home',
         component: Home,
-        path: '/',
+        path: '/home',
         exact: true,
-        isShown,
+        isShown: true,
     },
     {
         name: 'genre',
