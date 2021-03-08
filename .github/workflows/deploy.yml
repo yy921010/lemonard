@@ -31,7 +31,7 @@ jobs:
                   FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
                   METHOD: sftp
                   LOCAL_DIR: build
-                  REMOTE_DIR: /usr/share/nginx/html
+                  REMOTE_DIR: /usr/local/docker/nginx/html
                   ARGS: --delete
 
     GIT-Tags:
