@@ -3,10 +3,12 @@
   "version": "0.2.2",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.3.11",
     "@tailwindcss/postcss7-compat": "^2.0.2",
     "ahooks": "^2.9.6",
     "autoprefixer": "^9",
     "framer-motion": "^3.6.7",
+    "graphql": "^15.5.0",
     "i18next": "^19.7.0",
     "keen-slider": "^5.4.0",
     "postcss": "^7",
