@@ -1,5 +1,7 @@
+import { Image } from './Vod';
+
 export interface Menu {
     id: string;
-    title: string;
-    isMain: number;
+    name: string;
+    images: [Image];
 }

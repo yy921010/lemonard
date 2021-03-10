@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import 'twin.macro';
 import { Icon } from '@/components';
-import { useRequest } from 'ahooks';
 import { Menu } from '@/interfaces';
 import { useHistory } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
 import {
     Nav,
     NavContainer,
@@ -15,12 +15,15 @@ import {
     MainMenus,
     MainMenuItem,
 } from '../_styled';
+import { QUERY_MENU } from '../graphql/menu';
 
 const NavBar: React.FC = () => {
     const [bgBlackNumber, setBgBlackNumber] = useState<number>(0);
     const [isShowMenu, setShowMenu] = useState<boolean>(false);
-    const { data } = useRequest<Menu[]>('/menu');
     const history = useHistory();
+    const { data } = useQuery<{
+        menu: Menu[];
+    }>(QUERY_MENU);
 
     const run = () => {
         if (window.pageYOffset < 80) {
@@ -58,15 +61,13 @@ const NavBar: React.FC = () => {
                 <img tw="w-16" src="/img/logo.png" alt="logo" onClick={reBackHome} aria-hidden="true" />
                 <MainMenus>
                     {data &&
-                        data
-                            .filter((item) => item.isMain)
-                            .map((item) => {
-                                return (
-                                    <MainMenuItem to={`/genre/${item.id}`} key={item.id}>
-                                        {item.title}
-                                    </MainMenuItem>
-                                );
-                            })}
+                        data.menu.map((item) => {
+                            return (
+                                <MainMenuItem to={`/genre/${item.id}`} key={item.id}>
+                                    {item.name}
+                                </MainMenuItem>
+                            );
+                        })}
                 </MainMenus>
                 {!isShowMenu ? (
                     <Icon name="search" tw="text-2xl cursor-pointer text-gray-50" onClick={handleSearch} />
@@ -86,21 +87,19 @@ const NavBar: React.FC = () => {
                         </TopLogo>
                         <MenuList>
                             {data &&
-                                data
-                                    .filter((item) => item.isMain)
-                                    .map((item) => {
-                                        return (
-                                            <MenuItem
-                                                key={item.id}
-                                                onClick={(event: { stopPropagation: () => void }) => {
-                                                    history.push(`/genre/${item.id}`);
-                                                    event.stopPropagation();
-                                                }}
-                                            >
-                                                {item.title}
-                                            </MenuItem>
-                                        );
-                                    })}
+                                data.menu.map((item) => {
+                                    return (
+                                        <MenuItem
+                                            key={item.id}
+                                            onClick={(event: { stopPropagation: () => void }) => {
+                                                history.push(`/genre/${item.id}`);
+                                                event.stopPropagation();
+                                            }}
+                                        >
+                                            {item.name}
+                                        </MenuItem>
+                                    );
+                                })}
                         </MenuList>
                     </SideBarTop>
                 </NavSideBar>
