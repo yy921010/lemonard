@@ -5,23 +5,27 @@ import { Helmet } from 'react-helmet';
 import { ContentType, Navigator } from '@/interfaces/Navigator';
 import { getImageUrl } from '@/utils';
 import { Vod } from '@/interfaces';
+import { useQuery } from '@apollo/client';
 import { Billboard, Detail, MiniModal, MiniModalProps, PosterWall, StructureGrid } from '../components';
 import { NavigatorContainer } from '../_styled';
+import { QUERY_NAVIGATOR } from '../graphql/queryNavigator';
 import 'twin.macro';
 
-function useQuery() {
+function useLocationQuery() {
     return new URLSearchParams(useLocation().search);
 }
 
 function NavigatorDetail(): JSX.Element {
     const { id } = useParams<{ id: string }>();
-    const { data } = useRequest<Navigator>(`/menu/${id}`, {
-        ready: !!id,
+
+    const { data } = useQuery<{ navigator: Navigator }>(QUERY_NAVIGATOR, {
+        variables: { navigatorId: id },
     });
+
     console.log('data', data);
     const history = useHistory();
 
-    const query = useQuery();
+    const query = useLocationQuery();
 
     const handleMore = (link: string) => {};
 
@@ -100,12 +104,12 @@ function NavigatorDetail(): JSX.Element {
             {data ? (
                 <>
                     <Helmet>
-                        <title>{data.theme.metaInformation.title}</title>
-                        <meta name="description" content={data.theme.metaInformation.description} />
-                        <meta name="keywords" content={data.theme.metaInformation.keywords} />
+                        <title>{data.navigator.theme.metaInformation.title}</title>
+                        <meta name="description" content={data.navigator.theme.metaInformation.description} />
+                        <meta name="keywords" content={data.navigator.theme.metaInformation.keywords} />
                     </Helmet>
                     <NavigatorContainer>
-                        {data.contents.map((item) => {
+                        {data.navigator.contents.map((item) => {
                             if (item.type === ContentType.SlickGrid) {
                                 return (
                                     <MiniModal
