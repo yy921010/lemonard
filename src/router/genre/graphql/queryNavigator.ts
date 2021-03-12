@@ -13,6 +13,7 @@ export const QUERY_NAVIGATOR = gql`
             }
             contents {
                 id
+                type
                 coloredTitles {
                     title
                     color
@@ -35,4 +36,45 @@ export const QUERY_NAVIGATOR = gql`
     }
 `;
 
-export default QUERY_NAVIGATOR;
+export const QUERY_VOD_BY_ID = gql`
+    query getVodById($vodId: String!) {
+        vod(id: $vodId) {
+            id
+            title
+            subtitle
+            description
+            genres {
+                id
+                name
+            }
+            images {
+                href
+                type
+            }
+            actors {
+                id
+                images {
+                    href
+                    type
+                }
+                name
+            }
+            seasons {
+                id
+                name
+                episodes {
+                    id
+                    title
+                    playDuration
+                    episodeNumber
+                    description
+                    images {
+                        href
+                        type
+                    }
+                    playUrl
+                }
+            }
+        }
+    }
+`;

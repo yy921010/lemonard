@@ -3,7 +3,7 @@ import { Button, Icon } from '@/components';
 import { Vod } from '@/interfaces';
 import { getImageUrl } from '@/utils';
 import { useHistory } from 'react-router-dom';
-import { useRequest } from 'ahooks';
+import { useQuery } from '@apollo/client';
 import Seasons from './Season';
 import 'twin.macro';
 
@@ -27,6 +27,7 @@ import {
     VodModalContent,
     VodModalContentMain,
 } from '../_styled';
+import { QUERY_VOD_BY_ID } from '../graphql/queryNavigator';
 
 interface Tag {
     name?: string;
@@ -42,15 +43,15 @@ const Detail: React.FC<{
     navigatorId: string;
 }> = ({ vodId, navigatorId }) => {
     let history = useHistory();
-    const { data: vodInfo } = useRequest<Vod>(`/vod-info`, {
-        ready: !!vodId,
+    const { data: vodData } = useQuery<{ vod: Vod }>(QUERY_VOD_BY_ID, {
+        variables: { vodId },
     });
 
     const detailTags = useMemo<DetailTag[]>(() => {
-        if (!vodInfo) {
+        if (!vodData?.vod) {
             return [];
         }
-        const actorsNotPic = vodInfo.actors.map((item) => {
+        const actorsNotPic = vodData?.vod.actors.map((item) => {
             return {
                 id: item.id,
                 name: item.name,
@@ -63,11 +64,11 @@ const Detail: React.FC<{
 
         const genreTag = {
             tagTitle: '类别',
-            tags: vodInfo.genres as Tag,
+            tags: vodData?.vod.genres as Tag,
         };
         return [actorTag, genreTag] as DetailTag[];
-    }, [vodInfo]);
-    return vodInfo && vodId ? (
+    }, [vodData]);
+    return vodData?.vod && vodId ? (
         <>
             <VodMask />
             <VodModalRoot>
@@ -83,11 +84,11 @@ const Detail: React.FC<{
                             <Icon name="close" tw="text-gray-100 text-2xl" />
                         </Button>
                         <div tw="relative">
-                            <VodBackground background={getImageUrl(vodInfo.images, 14)}>
+                            <VodBackground background={getImageUrl(vodData?.vod.images, 14)}>
                                 <PreModalInfo>
                                     <VodTitle>
-                                        <Title>{vodInfo.title}</Title>
-                                        <SubTitle>{vodInfo.subTitle}</SubTitle>
+                                        <Title>{vodData?.vod.title}</Title>
+                                        <SubTitle>{vodData?.vod.subTitle}</SubTitle>
                                     </VodTitle>
                                     <VodAction>
                                         <Button primary>
@@ -109,11 +110,11 @@ const Detail: React.FC<{
                             <VodMeta>
                                 <VodMetaLeft>
                                     <VodBaseInfo>
-                                        <span tw="text-green-500">{vodInfo.rate}</span>
-                                        <span>{vodInfo.language}</span>
-                                        <span>{vodInfo.time}</span>
+                                        <span tw="text-green-500">{vodData?.vod.rate}</span>
+                                        <span>{vodData?.vod.language}</span>
+                                        <span>{vodData?.vod.time}</span>
                                     </VodBaseInfo>
-                                    <VodDescription> {vodInfo.description}</VodDescription>
+                                    <VodDescription> {vodData?.vod.description}</VodDescription>
                                 </VodMetaLeft>
                                 <VodMetaRight>
                                     {detailTags.length > 0
@@ -134,8 +135,8 @@ const Detail: React.FC<{
                                         : ''}
                                 </VodMetaRight>
                             </VodMeta>
-                            {Array.isArray(vodInfo.seasons) && vodInfo.seasons?.length > 0 ? (
-                                <Seasons {...vodInfo.seasons} />
+                            {Array.isArray(vodData?.vod.seasons) && vodData?.vod.seasons?.length > 0 ? (
+                                <Seasons {...vodData?.vod.seasons} />
                             ) : (
                                 ''
                             )}

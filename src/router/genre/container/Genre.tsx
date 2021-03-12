@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
-import { useDebounceFn, useRequest } from 'ahooks';
+import { useDebounceFn, useScroll, useUpdateEffect } from 'ahooks';
 import { Helmet } from 'react-helmet';
 import { ContentType, Navigator } from '@/interfaces/Navigator';
 import { getImageUrl } from '@/utils';
@@ -10,6 +10,9 @@ import { Billboard, Detail, MiniModal, MiniModalProps, PosterWall, StructureGrid
 import { NavigatorContainer } from '../_styled';
 import { QUERY_NAVIGATOR } from '../graphql/queryNavigator';
 import 'twin.macro';
+
+let isScrolled = false;
+let scrollTimeId: NodeJS.Timeout;
 
 function useLocationQuery() {
     return new URLSearchParams(useLocation().search);
@@ -22,9 +25,7 @@ function NavigatorDetail(): JSX.Element {
         variables: { navigatorId: id },
     });
 
-    console.log('data', data);
     const history = useHistory();
-
     const query = useLocationQuery();
 
     const handleMore = (link: string) => {};
@@ -36,6 +37,22 @@ function NavigatorDetail(): JSX.Element {
         layoutId: '',
         height: 0,
     });
+    const scroll = useScroll(document);
+
+    useUpdateEffect(() => {
+        isScrolled = true;
+        setPositionModal({
+            left: 0,
+            top: 0,
+            width: 0,
+            layoutId: '',
+            height: 0,
+        });
+        clearTimeout(scrollTimeId);
+        scrollTimeId = setTimeout(() => {
+            isScrolled = false;
+        }, 50);
+    }, [scroll]);
 
     const { run, cancel } = useDebounceFn(
         (boundingClientRect: DOMRect, teaser: Vod) => {
@@ -84,6 +101,9 @@ function NavigatorDetail(): JSX.Element {
     );
 
     const onMouseEnterHandle = (event: React.MouseEvent, teaser: Vod) => {
+        if (isScrolled) {
+            return;
+        }
         const boundingClientRect = event.currentTarget.getBoundingClientRect();
         setPositionModal({
             left: 0,
@@ -109,25 +129,25 @@ function NavigatorDetail(): JSX.Element {
                         <meta name="keywords" content={data.navigator.theme.metaInformation.keywords} />
                     </Helmet>
                     <NavigatorContainer>
-                        {data.navigator.contents.map((item) => {
-                            if (item.type === ContentType.SlickGrid) {
-                                return (
-                                    <MiniModal
-                                        key={item.id}
-                                        {...positionModal}
-                                        onMouseLeaveHandle={() => {
-                                            cancel();
-                                            setPositionModal({
-                                                left: 0,
-                                                top: 0,
-                                                width: 0,
-                                                layoutId: '',
-                                                height: 0,
-                                            });
-                                        }}
-                                        onShowMoreHandle={(vod) => {}}
-                                    >
+                        <MiniModal
+                            {...positionModal}
+                            onMouseLeaveHandle={() => {
+                                cancel();
+                                setPositionModal({
+                                    left: 0,
+                                    top: 0,
+                                    width: 0,
+                                    layoutId: '',
+                                    height: 0,
+                                });
+                            }}
+                            onShowMoreHandle={onHoverEndHandle}
+                        >
+                            {data.navigator.contents.map((item) => {
+                                if (item.type === ContentType.SlickGrid) {
+                                    return (
                                         <StructureGrid
+                                            key={item.id}
                                             teasers={item.teasers}
                                             content={item}
                                             onHoverEndHandle={() => {}}
@@ -136,45 +156,30 @@ function NavigatorDetail(): JSX.Element {
                                                 handleMore(item.laneContentLink);
                                             }}
                                         />
-                                    </MiniModal>
-                                );
-                            }
-                            if (item.type === ContentType.Carousel) {
+                                    );
+                                }
+                                if (item.type === ContentType.Carousel) {
+                                    return (
+                                        <Billboard
+                                            key={item.id}
+                                            title={item.teasers[0].title}
+                                            description={item.teasers[0].description}
+                                            backgroundImage={getImageUrl(item.teasers[0].images, 15)}
+                                        />
+                                    );
+                                }
                                 return (
-                                    <Billboard
-                                        key={item.id}
-                                        title={item.teasers[0].title}
-                                        description={item.teasers[0].description}
-                                        backgroundImage={getImageUrl(item.teasers[0].images, 15)}
-                                    />
-                                );
-                            }
-                            return (
-                                <MiniModal
-                                    key={item.id}
-                                    {...positionModal}
-                                    onMouseLeaveHandle={() => {
-                                        cancel();
-                                        setPositionModal({
-                                            left: 0,
-                                            top: 0,
-                                            width: 0,
-                                            layoutId: '',
-                                            height: 0,
-                                        });
-                                    }}
-                                    onShowMoreHandle={onHoverEndHandle}
-                                >
                                     <PosterWall
+                                        key={item.id}
                                         teasers={item.teasers}
                                         onHoverEndHandle={() => {
                                             cancel();
                                         }}
                                         onHoverStartHandle={onMouseEnterHandle}
                                     />
-                                </MiniModal>
-                            );
-                        })}
+                                );
+                            })}
+                        </MiniModal>
                     </NavigatorContainer>
                     <Detail vodId={query.get('vod-id') || ''} navigatorId={id} />
                 </>
